@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Login"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="180dp"
+            android:layout_height="140dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/color_traveller"
+             />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="180dp"
+            android:layout_height="140dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/color_tempo"
+             />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/bangers"
+        android:gravity="center"
+        android:text="WELCOME TO CHEAP RENT"
+        android:textColor="@color/black"
+        android:textSize="45sp"
+         />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:text="Signup Here"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+         />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical">
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:hint="Name"
+                android:id="@+id/Full_name"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:hint="Phone"
+                android:id="@+id/Phone"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            app:passwordToggleEnabled="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:hint="One Time Password"
+                android:id="@+id/otp"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Signup"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/signup"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"/>
+         <com.google.android.material.button.MaterialButton
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:id="@+id/login"
+             app:backgroundTint="@color/green"
+             android:layout_marginTop="10dp"
+             android:layout_marginRight="20dp"
+             android:background="@color/green"
+             android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
+</ScrollView>
