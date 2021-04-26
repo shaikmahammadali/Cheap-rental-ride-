@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "345996454285",
+    "project_id": "cheaprentalrides",
+    "storage_bucket": "cheaprentalrides.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:345996454285:android:dd4c5a80dcb1cc410cf5c4",
+        "android_client_info": {
+          "package_name": "com.example.cheaprentalrides"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "345996454285-qkts840vc3am71ss5u4446r6jgj6uv12.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2JFrXjdWz5i7GZMOHe7yBGbPidbeYNHQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "345996454285-qkts840vc3am71ss5u4446r6jgj6uv12.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

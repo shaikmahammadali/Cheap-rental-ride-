@@ -11,6 +11,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.cheaprentalrides.UserLogin.Login;
+
 public class MainActivity extends AppCompatActivity {
     private  static int splash_screen=4000;
     //variables
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(MainActivity.this,Login.class));
+                startActivity(new Intent(MainActivity.this, Login.class));
                 finish();
             }
         },splash_screen);
