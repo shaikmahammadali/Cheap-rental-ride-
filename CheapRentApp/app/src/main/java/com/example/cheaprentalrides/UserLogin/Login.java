@@ -37,7 +37,7 @@ public class Login extends AppCompatActivity {
     DatabaseReference reference;
     MaterialButton login;
     String person_name,String_phone,String_otp;
-    String Verficationcodebysystem;
+    String Verficationcodebysystem,verficationcode;
     private FirebaseAuth mAuth;
 
     @Override
@@ -54,6 +54,21 @@ public class Login extends AppCompatActivity {
         rootnode=FirebaseDatabase.getInstance();
         reference=rootnode.getReference("users");
         //save users data in firebase
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String code = otp.getText().toString();
+                if(code.isEmpty()||code.length()<6)
+                {
+                    otp.setError("Wrong OTP....");
+                    otp.requestFocus();
+                    return ;
+                }
+                verifyCode(code);
+                Intent intent =new Intent(Login.this,HomePage.class);
+                startActivity(intent);
+            }
+        });
         sendotp_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,24 +108,19 @@ public class Login extends AppCompatActivity {
         PhoneAuthOptions options =
                 PhoneAuthOptions.newBuilder(mAuth)
                         .setPhoneNumber(phonenumber)       // Phone number to verify
-                        .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+                        .setTimeout(60L,TimeUnit.SECONDS) // Timeout and unit
                         .setActivity(this)                 // Activity (for callback binding)
                         .setCallbacks(mcallback)          // OnVerificationStateChangedCallbacks
                         .build();
         PhoneAuthProvider.verifyPhoneNumber(options);
+        mAuth.setLanguageCode("fr");
         Log.i("mobilenumber","+91"+phone);
 
 
     }
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mcallback=new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
-        @Override
-        public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-            super.onCodeSent(s, forceResendingToken);
-            Verficationcodebysystem=s;
-            textView_otp.setText("OTP sent Valid upto 5 Min");
-            textView_otp.setTextColor(Color.GREEN);
-        }
+
 
         @Override
         public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
@@ -125,6 +135,14 @@ public class Login extends AppCompatActivity {
             textView_otp.setText(e.getMessage());
             textView_otp.setTextColor(Color.RED);
 
+        }
+
+        @Override
+        public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+            super.onCodeSent(s, forceResendingToken);
+            Verficationcodebysystem=s;
+            textView_otp.setText("OTP sent Valid upto 5 Min");
+            textView_otp.setTextColor(Color.GREEN);
         }
     };
 
@@ -145,7 +163,8 @@ public class Login extends AppCompatActivity {
                            LoginHelper user_data=new LoginHelper(person_name,String_phone);
                            reference.child(String_phone).setValue(user_data);
                            Intent intent=new Intent(Login.this, HomePage.class);
-                           intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                           /*intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);*/
+
                            startActivity(intent);
                        }
                        else {
