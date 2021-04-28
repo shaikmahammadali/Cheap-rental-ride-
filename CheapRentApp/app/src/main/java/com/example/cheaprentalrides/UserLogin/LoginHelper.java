@@ -5,10 +5,9 @@ public class LoginHelper
 {
     String name,phone,otp;
 
-    public LoginHelper(String name, String phone, String otp) {
+    public LoginHelper(String name, String phone) {
         this.name = name;
         this.phone = phone;
-        this.otp = otp;
     }
 
     public String getName() {
@@ -27,11 +26,4 @@ public class LoginHelper
         this.phone = phone;
     }
 
-    public String getOtp() {
-        return otp;
-    }
-
-    public void setOtp(String otp) {
-        this.otp = otp;
-    }
 }
