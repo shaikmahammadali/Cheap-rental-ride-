@@ -45,7 +45,7 @@ class ViewPagerAdapter extends FragmentPagerAdapter {
         switch (position){
             case 0 :return new Search();
             case 1: return  new Post();
-            case 3 :return  new Profile();
+            case 2 :return  new Profile();
         }
         return null;
     }

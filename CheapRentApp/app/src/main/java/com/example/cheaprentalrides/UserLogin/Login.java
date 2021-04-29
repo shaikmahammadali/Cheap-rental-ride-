@@ -177,5 +177,8 @@ public class Login extends AppCompatActivity {
     }
 
 
+    public void homepage(View view) {
+        startActivity(new Intent(this,HomePage.class));
+    }
 }
 

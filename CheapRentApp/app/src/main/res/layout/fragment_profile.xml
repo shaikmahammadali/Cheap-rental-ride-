@@ -24,6 +24,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:id="@+id/profile_fullname"
                 android:text="Shaik Mahammad Ali"
                 android:textSize="20sp"
@@ -35,6 +37,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:id="@+id/User_Phone"
                 android:text="9398600672"
                 android:textSize="14sp"
@@ -64,17 +68,17 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:padding="10dp"
                         android:text="Active Posts"
-                        android:layout_margin="10dp"
                         android:fontFamily="@font/bangers"
                         android:id="@+id/active"
                         android:layout_centerHorizontal="true"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:padding="10dp"
                         android:text="12"
                         android:id="@+id/active_posts"
-                        android:layout_margin="10dp"
                         android:fontFamily="@font/bangers"
                         android:textSize="20sp"
                         android:layout_centerInParent="true"
@@ -99,7 +103,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Deactive Posts"
-                        android:layout_margin="10dp"
+                        android:padding="10dp"
                         android:fontFamily="@font/bangers"
                         android:id="@+id/Deactive"
                         android:layout_centerHorizontal="true"/>
@@ -107,7 +111,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="4"
-                        android:layout_margin="10dp"
+                        android:padding="10dp"
                         android:fontFamily="@font/bangers"
                         android:textSize="20sp"
                         android:layout_centerInParent="true"
@@ -118,11 +122,95 @@
             </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:orientation="vertical"
+            >
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:id="@+id/full_name"
+                    android:singleLine="true"
+                    android:drawablePadding="10dp"
+                    android:inputType="textPersonName"
+                    android:textColorHint="@color/black"
+                    android:textCursorDrawable="@drawable/blackcolor"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Shaik Mahammad Ali"
+                    android:drawableLeft="@drawable/ic_baseline_person_24"/>
 
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phone"
+                    android:inputType="phone"
+                    android:layout_width="match_parent"
+                    android:singleLine="true"
+                    android:drawablePadding="10dp"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textCursorDrawable="@drawable/blackcolor"
+                    android:text="9398600672"
+                    android:drawableLeft="@drawable/ic_baseline_phone_24"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:id="@+id/email"
+                    android:inputType="textEmailAddress"
+                    android:textCursorDrawable="@drawable/blackcolor"
+                    android:singleLine="true"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="shaikmahammadali400@gmail.com"
+                    android:drawablePadding="10dp"
+                    android:drawableLeft="@drawable/ic_baseline_email_24"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               >
+               <com.google.android.material.button.MaterialButton
+                   android:layout_width="0dp"
+                   android:layout_weight="0.5"
+                   android:background="@color/activitybackground"
+                   android:layout_marginRight="10dp"
+                   android:layout_height="wrap_content"
+                   android:text="Edit"
+                   />
+               <com.google.android.material.button.MaterialButton
+                   android:layout_width="0dp"
+                   android:layout_weight="0.5"
+                   android:background="@color/activitybackground"
+                   android:layout_marginLeft="10dp"
+                   android:layout_height="wrap_content"
+                   android:text="Update"
+                   />
+           </LinearLayout>
+
+
+        </LinearLayout>
     </LinearLayout>
     <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
-        android:layout_width=""
-        android:layout_height=""
+
 
 </FrameLayout>

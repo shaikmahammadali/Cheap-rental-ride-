@@ -12,10 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CheapRentalRides">
         <activity android:name=".HomePage.HomePage"></activity>
-        <activity
-            android:name=".dashboard.Dashboard"
-            android:label="@string/title_activity_dashboard"
-            android:theme="@style/Theme.CheapRentalRides.NoActionBar" />
+
         <activity android:name=".UserLogin.Login" />
         <activity
             android:name=".MainActivity"
