@@ -1,216 +1,264 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".HomePage.Profile">
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:background="@color/activitybackground"
-            android:padding="20dp">
+        android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/ali_photo"
-                android:id="@+id/profile_image"
-                android:layout_centerVertical="true"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:id="@+id/profile_fullname"
-                android:text="Shaik Mahammad Ali"
-                android:textSize="20sp"
-                android:includeFontPadding="false"
-                android:fontFamily="@font/bangers"
-                android:layout_toRightOf="@+id/profile_image"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:id="@+id/User_Phone"
-                android:text="9398600672"
-                android:textSize="14sp"
-                android:includeFontPadding="false"
-                android:layout_toRightOf="@+id/profile_image"
-                android:layout_below="@+id/profile_fullname"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"/>
-
-        </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:padding="20dp"
-            android:layout_marginTop="-100dp"
-            android:layout_height="wrap_content">
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                app:cardBackgroundColor="@color/activitybackground"
-                android:elevation="10dp"
-                android:layout_margin="10dp"
-                android:layout_height="125dp"
-                android:layout_weight="1">
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="5dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:text="Active Posts"
-                        android:fontFamily="@font/bangers"
-                        android:id="@+id/active"
-                        android:layout_centerHorizontal="true"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:text="12"
-                        android:id="@+id/active_posts"
-                        android:fontFamily="@font/bangers"
-                        android:textSize="20sp"
-                        android:layout_centerInParent="true"
-                        android:layout_below="@id/active"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-                </RelativeLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                app:cardBackgroundColor="@color/activitybackground"
-                android:elevation="10dp"
-                android:layout_margin="10dp"
-                android:layout_height="125dp"
-                android:layout_weight="1">
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="5dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Deactive Posts"
-                        android:padding="10dp"
-                        android:fontFamily="@font/bangers"
-                        android:id="@+id/Deactive"
-                        android:layout_centerHorizontal="true"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="4"
-                        android:padding="10dp"
-                        android:fontFamily="@font/bangers"
-                        android:textSize="20sp"
-                        android:layout_centerInParent="true"
-                        android:layout_below="@+id/Deactive"/>
-
-                </RelativeLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:orientation="vertical"
-            >
-            <com.google.android.material.textfield.TextInputLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                >
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:id="@+id/full_name"
-                    android:singleLine="true"
-                    android:drawablePadding="10dp"
-                    android:inputType="textPersonName"
-                    android:textColorHint="@color/black"
-                    android:textCursorDrawable="@drawable/blackcolor"
+                android:layout_height="200dp"
+                android:background="@color/activitybackground"
+                android:padding="20dp">
+
+                <ImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ali_photo" />
+
+                <TextView
+                    android:id="@+id/profile_fullname"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/profile_image"
+                    android:fontFamily="@font/bangers"
+                    android:includeFontPadding="false"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     android:text="Shaik Mahammad Ali"
-                    android:drawableLeft="@drawable/ic_baseline_person_24"/>
+                    android:textSize="20sp" />
 
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                >
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/phone"
-                    android:inputType="phone"
-                    android:layout_width="match_parent"
-                    android:singleLine="true"
-                    android:drawablePadding="10dp"
+                <TextView
+                    android:id="@+id/profile_Phone"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:textCursorDrawable="@drawable/blackcolor"
+                    android:layout_below="@+id/profile_fullname"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/profile_image"
+                    android:includeFontPadding="false"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     android:text="9398600672"
-                    android:drawableLeft="@drawable/ic_baseline_phone_24"/>
+                    android:textSize="14sp" />
 
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
+            </RelativeLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                >
-                <com.google.android.material.textfield.TextInputEditText
+                android:layout_marginTop="-100dp"
+                android:padding="20dp">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="125dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:elevation="10dp"
+                    app:cardBackgroundColor="@color/activitybackground">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:id="@+id/active"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:fontFamily="@font/bangers"
+                            android:padding="10dp"
+                            android:text="Active Posts" />
+
+                        <TextView
+                            android:id="@+id/active_posts"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/active"
+                            android:layout_centerInParent="true"
+                            android:fontFamily="@font/bangers"
+                            android:padding="10dp"
+                            android:text="12"
+                            android:textSize="20sp" />
+
+                    </RelativeLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="125dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:elevation="10dp"
+                    app:cardBackgroundColor="@color/activitybackground">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:id="@+id/Deactive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:fontFamily="@font/bangers"
+                            android:padding="10dp"
+                            android:text="Deactive Posts" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/Deactive"
+                            android:layout_centerInParent="true"
+                            android:fontFamily="@font/bangers"
+                            android:padding="10dp"
+                            android:text="4"
+                            android:textSize="20sp" />
+
+                    </RelativeLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:id="@+id/email"
-                    android:inputType="textEmailAddress"
-                    android:textCursorDrawable="@drawable/blackcolor"
-                    android:singleLine="true"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="shaikmahammadali400@gmail.com"
-                    android:drawablePadding="10dp"
-                    android:drawableLeft="@drawable/ic_baseline_email_24"/>
+                    app:hintTextColor="@color/black"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginBottom="10dp">
 
-            </com.google.android.material.textfield.TextInputLayout>
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:orientation="horizontal"
-               >
-               <com.google.android.material.button.MaterialButton
-                   android:layout_width="0dp"
-                   android:layout_weight="0.5"
-                   android:background="@color/activitybackground"
-                   android:layout_marginRight="10dp"
-                   android:layout_height="wrap_content"
-                   android:text="Edit"
-                   />
-               <com.google.android.material.button.MaterialButton
-                   android:layout_width="0dp"
-                   android:layout_weight="0.5"
-                   android:background="@color/activitybackground"
-                   android:layout_marginLeft="10dp"
-                   android:layout_height="wrap_content"
-                   android:text="Update"
-                   />
-           </LinearLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/full_name"
+                        android:layout_width="match_parent"
+                        android:hint="Full Name"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_baseline_person_24"
+                        android:drawablePadding="10dp"
+                        android:inputType="textPersonName"
+                        android:padding="10dp"
+                        android:singleLine="true"
+                        android:text="Shaik Mahammad Ali"
+                        android:textColorHint="@color/black"
+                        android:textCursorDrawable="@drawable/blackcolor" />
 
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_height="wrap_content"
+                    android:hint="Phone Number"
+                    app:hintTextColor="@color/black"
+                    android:layout_marginBottom="10dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_baseline_phone_24"
+                        android:drawablePadding="10dp"
+                        android:inputType="phone"
+                        android:padding="10dp"
+                        android:singleLine="true"
+                        android:text="9398600672"
+                        android:textCursorDrawable="@drawable/blackcolor" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:hint="Email"
+                    app:hintTextColor="@color/black"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_baseline_email_24"
+                        android:drawablePadding="10dp"
+                        android:inputType="textEmailAddress"
+                        android:padding="10dp"
+                        android:singleLine="true"
+                        android:text="shaikmahammadali400@gmail.com"
+                        android:textCursorDrawable="@drawable/blackcolor" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/Vehicle_Number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:hint="Vehicle Number"
+                        android:padding="10dp"
+                        android:singleLine="true"
+                        android:text="AP04 AA 1427" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/profile_edit"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="0.5"
+                        android:background="@color/activitybackground"
+                        android:text="Edit" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="0dp"
+                        android:id="@+id/profile_update"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.5"
+                        android:background="@color/activitybackground"
+                        android:text="Update" />
+                </LinearLayout>
+
+
+            </LinearLayout>
 
         </LinearLayout>
-    </LinearLayout>
-    <!-- TODO: Update blank fragment layout -->
-
+        <!-- TODO: Update blank fragment layout -->
+    </ScrollView>
 
 </FrameLayout>

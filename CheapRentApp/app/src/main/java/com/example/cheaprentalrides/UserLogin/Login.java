@@ -32,9 +32,9 @@ import java.util.concurrent.TimeUnit;
 
 public class Login extends AppCompatActivity {
     TextInputEditText name,phone,otp;
-    FirebaseDatabase rootnode;
+    public FirebaseDatabase rootnode;
     TextView textView_phone,textView_otp,sendotp_btn;
-    DatabaseReference reference;
+    public DatabaseReference reference;
     MaterialButton login;
     String person_name,String_phone,String_otp;
     String Verficationcodebysystem,verficationcode;
@@ -75,6 +75,7 @@ public class Login extends AppCompatActivity {
 
             person_name=name.getEditableText().toString();
             String_phone=phone.getEditableText().toString();
+            String_phone=String_phone.replaceAll("\\s","");
             if(String_phone.length()==10&& (String_phone.charAt(0)=='9'|String_phone.charAt(0)=='8'|
                     String_phone.charAt(0)=='7'|String_phone.charAt(0)=='6')){
                 String_otp=otp.getEditableText().toString();
@@ -164,7 +165,7 @@ public class Login extends AppCompatActivity {
                            reference.child(String_phone).setValue(user_data);
                            Intent intent=new Intent(Login.this, HomePage.class);
                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
+                           intent.putExtra(String_phone,"phone");
                            startActivity(intent);
                            finish();
                        }
