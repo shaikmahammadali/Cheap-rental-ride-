@@ -3,12 +3,126 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".HomePage.Profile">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="@color/activitybackground"
+            android:padding="20dp">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ali_photo"
+                android:id="@+id/profile_image"
+                android:layout_centerVertical="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/profile_fullname"
+                android:text="Shaik Mahammad Ali"
+                android:textSize="20sp"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/bangers"
+                android:layout_toRightOf="@+id/profile_image"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/User_Phone"
+                android:text="9398600672"
+                android:textSize="14sp"
+                android:includeFontPadding="false"
+                android:layout_toRightOf="@+id/profile_image"
+                android:layout_below="@+id/profile_fullname"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"/>
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:padding="20dp"
+            android:layout_marginTop="-100dp"
+            android:layout_height="wrap_content">
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                app:cardBackgroundColor="@color/activitybackground"
+                android:elevation="10dp"
+                android:layout_margin="10dp"
+                android:layout_height="125dp"
+                android:layout_weight="1">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Active Posts"
+                        android:layout_margin="10dp"
+                        android:fontFamily="@font/bangers"
+                        android:id="@+id/active"
+                        android:layout_centerHorizontal="true"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="12"
+                        android:id="@+id/active_posts"
+                        android:layout_margin="10dp"
+                        android:fontFamily="@font/bangers"
+                        android:textSize="20sp"
+                        android:layout_centerInParent="true"
+                        android:layout_below="@id/active"/>
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                app:cardBackgroundColor="@color/activitybackground"
+                android:elevation="10dp"
+                android:layout_margin="10dp"
+                android:layout_height="125dp"
+                android:layout_weight="1">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Deactive Posts"
+                        android:layout_margin="10dp"
+                        android:fontFamily="@font/bangers"
+                        android:id="@+id/Deactive"
+                        android:layout_centerHorizontal="true"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4"
+                        android:layout_margin="10dp"
+                        android:fontFamily="@font/bangers"
+                        android:textSize="20sp"
+                        android:layout_centerInParent="true"
+                        android:layout_below="@+id/Deactive"/>
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width=""
+        android:layout_height=""
 
 </FrameLayout>

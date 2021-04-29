@@ -163,9 +163,10 @@ public class Login extends AppCompatActivity {
                            LoginHelper user_data=new LoginHelper(person_name,String_phone);
                            reference.child(String_phone).setValue(user_data);
                            Intent intent=new Intent(Login.this, HomePage.class);
-                           /*intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);*/
+                           intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                            startActivity(intent);
+                           finish();
                        }
                        else {
                            Toast.makeText(Login.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
