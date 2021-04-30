@@ -12,7 +12,9 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Switch;
@@ -35,6 +37,9 @@ public class HomePage extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
         tabLayout=findViewById(R.id.tablayout);
         viewPager=findViewById(R.id.viewpager);
+        SharedPreferences prefs =  getApplicationContext().getSharedPreferences("USER_PREF",
+                Context.MODE_PRIVATE);
+        phone_userid = prefs.getString("phone", null);
         new HomePage().phone_userid=getIntent().getStringExtra("phone");
         /*Log.i("number",phone_userid);*/
         ViewPagerAdapter viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());

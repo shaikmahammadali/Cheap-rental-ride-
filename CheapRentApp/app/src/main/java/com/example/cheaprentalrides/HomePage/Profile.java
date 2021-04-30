@@ -1,6 +1,8 @@
 package com.example.cheaprentalrides.HomePage;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,8 +16,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.cheaprentalrides.R;
+import com.example.cheaprentalrides.UserLogin.Login;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,28 +34,33 @@ public class Profile extends Fragment {
     private DatabaseReference reference;
     TextView pro_name,pro_phone;
     TextInputEditText e_fullname,e_phone,e_Email,E_vehicle_number;
-    MaterialButton edit,update;
+    MaterialButton edit,update,signout;
     Query checkUser;
+
     String Full_name , phone , Email,vehicle_number;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
-    }
+        View profileview =inflater.inflate(R.layout.fragment_profile, container, false);
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        phone= HomePage.phone_userid;
+        // getting user id from shared preference
+        SharedPreferences prefs =  getActivity().getSharedPreferences("Loginid",
+                Context.MODE_PRIVATE);
+        phone = prefs.getString("phone", null);
+        //getting Firebase refrence
         reference= FirebaseDatabase.getInstance().getReference("users");
-        pro_name= view.findViewById(R.id.profile_fullname);
-        pro_phone= view.findViewById(R.id.profile_Phone);
-        e_fullname= view.findViewById(R.id.full_name);
-        e_phone= view.findViewById(R.id.phone);
-        e_Email= view.findViewById(R.id.email);
-        E_vehicle_number= view.findViewById(R.id.Vehicle_Number);
+
+        //hooks
+        pro_name= profileview.findViewById(R.id.profile_fullname);
+        pro_phone= profileview.findViewById(R.id.profile_Phone);
+        e_fullname= profileview.findViewById(R.id.full_name);
+        e_phone= profileview.findViewById(R.id.phone);
+        e_Email= profileview.findViewById(R.id.email);
+        signout=profileview.findViewById(R.id.signout);
+        E_vehicle_number= profileview.findViewById(R.id.Vehicle_Number);
+
+        // query checking
         checkUser=reference.orderByChild("phone").equalTo(phone);
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -72,5 +81,19 @@ public class Profile extends Fragment {
 
             }
         });
+        //signout operation
+        signout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getActivity(),Login.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
+        // Inflate the layout for this fragment
+        return profileview;
     }
+
+
 }
