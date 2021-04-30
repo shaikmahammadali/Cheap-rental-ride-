@@ -46,12 +46,12 @@ public class Profile extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         phone= HomePage.phone_userid;
         reference= FirebaseDatabase.getInstance().getReference("users");
-        pro_name=(TextView) view.findViewById(R.id.profile_fullname);
-        pro_phone=(TextView)view.findViewById(R.id.profile_Phone);
-        e_fullname=(TextInputEditText)view.findViewById(R.id.full_name);
-        e_phone=(TextInputEditText)view.findViewById(R.id.phone);
-        e_Email=(TextInputEditText)view.findViewById(R.id.email);
-        E_vehicle_number=(TextInputEditText)view.findViewById(R.id.Vehicle_Number);
+        pro_name= view.findViewById(R.id.profile_fullname);
+        pro_phone= view.findViewById(R.id.profile_Phone);
+        e_fullname= view.findViewById(R.id.full_name);
+        e_phone= view.findViewById(R.id.phone);
+        e_Email= view.findViewById(R.id.email);
+        E_vehicle_number= view.findViewById(R.id.Vehicle_Number);
         checkUser=reference.orderByChild("phone").equalTo(phone);
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

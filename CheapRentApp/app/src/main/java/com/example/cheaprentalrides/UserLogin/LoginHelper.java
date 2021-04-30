@@ -3,9 +3,9 @@ package com.example.cheaprentalrides.UserLogin;
 // login class data
 public class LoginHelper
 {
-    String name,phone,email,vehicle_Number;
+    String name,phone/*email,vehicle_Number*/;
 
-    public String getEmail() {
+    /*public String getEmail() {
         return email;
     }
 
@@ -19,7 +19,7 @@ public class LoginHelper
 
     public void setVehicle_Number(String vehicle_Number) {
         this.vehicle_Number = vehicle_Number;
-    }
+    }*/
 
     public LoginHelper(String name, String phone) {
         this.name = name;
