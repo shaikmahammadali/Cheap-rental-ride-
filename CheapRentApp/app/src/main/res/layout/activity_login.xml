@@ -191,8 +191,7 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/Homepage"
-                    android:onClick="homepage"
+                    android:id="@+id/homepage"
                     android:text="homepage"/>
             </LinearLayout>
 

@@ -37,10 +37,9 @@ public class HomePage extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
         tabLayout=findViewById(R.id.tablayout);
         viewPager=findViewById(R.id.viewpager);
-        SharedPreferences prefs =  getApplicationContext().getSharedPreferences("USER_PREF",
+        SharedPreferences prefs =  getApplicationContext().getSharedPreferences("Loginid",
                 Context.MODE_PRIVATE);
         phone_userid = prefs.getString("phone", null);
-        new HomePage().phone_userid=getIntent().getStringExtra("phone");
         /*Log.i("number",phone_userid);*/
         ViewPagerAdapter viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);

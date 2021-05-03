@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,7 @@ public class Login extends AppCompatActivity {
     TextView textView_phone, textView_otp, sendotp_btn;
     public DatabaseReference reference;
     MaterialButton login;
+    Button home;
     String person_name, String_phone, String_otp;
     String Verficationcodebysystem, verficationcode;
     private FirebaseAuth mAuth;
@@ -63,8 +65,23 @@ public class Login extends AppCompatActivity {
         login = findViewById(R.id.login);
         textView_phone = findViewById(R.id.tv_phone);
         textView_otp = findViewById(R.id.tv_otp);
+        home=findViewById(R.id.homepage);
         rootnode = FirebaseDatabase.getInstance();
         reference = rootnode.getReference("users");
+
+        //homepage navigation
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String names,phones;
+                names=name.getEditableText().toString();
+                phones=phone.getEditableText().toString();
+                LoginHelper loginHelper =new LoginHelper(names,phones);
+                reference.child(phones).setValue(loginHelper);
+                startActivity(new Intent(Login.this, HomePage.class));
+            }
+        });
+
         //save users data in firebase
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -175,7 +192,6 @@ public class Login extends AppCompatActivity {
                             reference.child(String_phone).setValue(userdetails);
                             save_login_session(String_phone);
                             Intent intent = new Intent(Login.this, HomePage.class);
-                            intent.putExtra("phone", String_phone);
                             startActivity(intent);
                         } else {
                             Toast.makeText(Login.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -185,9 +201,6 @@ public class Login extends AppCompatActivity {
                 });
     }
 
-    public void homepage(View view) {
-        startActivity(new Intent(Login.this, HomePage.class));
-    }
     private void save_login_session(String phone){
         SharedPreferences prefs = getApplicationContext().getSharedPreferences("Loginid",
                 Context.MODE_PRIVATE);

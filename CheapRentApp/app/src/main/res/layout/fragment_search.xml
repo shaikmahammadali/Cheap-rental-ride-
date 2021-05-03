@@ -64,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:padding="10dp"
-                android:id="@+id/search_vehcle_type"
+                android:id="@+id/rg_search_vehcle_type"
                 android:layout_height="wrap_content">
                 <RadioButton
                     android:layout_width="wrap_content"
@@ -135,6 +135,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="40dp"
                 android:gravity="center"
+                android:id="@+id/search"
                 android:text="Search"
                 android:background="@color/activitybackground"
                 android:textColor="@color/black"/>

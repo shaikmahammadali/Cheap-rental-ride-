@@ -1,26 +1,26 @@
 package com.example.cheaprentalrides.UserLogin;
 
 public class LoginHelper {
-    public LoginHelper(String fullname, String phone) {
-        this.fullname = fullname;
-        this.phone = phone;
+    String name , Phone ;
+
+    public LoginHelper(String name, String phone) {
+        this.name = name;
+        Phone = phone;
     }
 
-    static String fullname,phone;
-
-    public static String getFullname() {
-        return fullname;
+    public String getName() {
+        return name;
     }
 
-    public static void setFullname(String fullname) {
-        LoginHelper.fullname = fullname;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public static String getPhone() {
-        return phone;
+    public String getPhone() {
+        return Phone;
     }
 
-    public static void setPhone(String phone) {
-        LoginHelper.phone = phone;
+    public void setPhone(String phone) {
+        Phone = phone;
     }
 }

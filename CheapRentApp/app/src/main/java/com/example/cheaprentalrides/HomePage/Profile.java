@@ -3,6 +3,7 @@ package com.example.cheaprentalrides.HomePage;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,7 +14,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cheaprentalrides.R;
 import com.example.cheaprentalrides.UserLogin.Login;
@@ -36,8 +39,10 @@ public class Profile extends Fragment {
     TextInputEditText e_fullname,e_phone,e_Email,E_vehicle_number;
     MaterialButton edit,update,signout;
     Query checkUser;
-
     String Full_name , phone , Email,vehicle_number;
+
+    public Profile() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,6 +64,8 @@ public class Profile extends Fragment {
         e_Email= profileview.findViewById(R.id.email);
         signout=profileview.findViewById(R.id.signout);
         E_vehicle_number= profileview.findViewById(R.id.Vehicle_Number);
+        edit=profileview.findViewById(R.id.profile_edit);
+        update=profileview.findViewById(R.id.profile_update);
 
         // query checking
         checkUser=reference.orderByChild("phone").equalTo(phone);
@@ -81,6 +88,36 @@ public class Profile extends Fragment {
 
             }
         });
+
+        //disable edittext
+        disabledEditText(e_fullname);
+        disabledEditText(e_phone);
+        disabledEditText(e_phone);
+        disabledEditText(e_Email);
+        disabledEditText(E_vehicle_number);
+
+        //edit profile
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                enableEditText(e_Email);
+                enableEditText(E_vehicle_number);
+                Toast.makeText(getActivity(), "Edit Profile Now", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        //update edited profile data to firebase
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                disabledEditText(e_Email);
+                disabledEditText(E_vehicle_number);
+                Toast.makeText(getActivity(), "Profile Updated", Toast.LENGTH_SHORT).show();
+                // add data to firebase
+            }
+        });
+
         //signout operation
         signout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,9 +128,30 @@ public class Profile extends Fragment {
                 startActivity(intent);
             }
         });
+
+        /*//disable all editText fields
+        e_fullname.setFocusable(false);
+        e_phone.setFocusable(false);*/
+
         // Inflate the layout for this fragment
         return profileview;
-    }
 
+    }
+    public void disabledEditText(TextInputEditText editText){
+        /*editText.setFocusable(false);*/
+        editText.setEnabled(false);
+        editText.setCursorVisible(false);
+        editText.setBackgroundColor(Color.TRANSPARENT);
+
+
+    }
+    public void enableEditText(TextInputEditText editText){
+        /*editText.setFocusable(true);*/
+        editText.setEnabled(true);
+        editText.setCursorVisible(true);
+        editText.setFocusable(true);
+        /*editText.setBackgroundColor(Color.WHITE);*/
+
+    }
 
 }
