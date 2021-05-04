@@ -29,7 +29,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:singleLine="true"
-                    android:inputType="text"
+                    android:inputType="textCapCharacters"
+                    android:textAllCaps="true"
                     android:id="@+id/search_source"
                     android:layout_height="wrap_content"
                     android:hint="Source">
@@ -47,7 +48,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:id="@+id/search_destination"
-                    android:inputType="text"
+                    android:inputType="textCapSentences"
+                    android:textAllCaps="true"
                     android:singleLine="true"
                     android:layout_height="wrap_content"
                     android:hint="Destination">
@@ -100,6 +102,7 @@
                     android:inputType="numberDecimal"
                     android:singleLine="true"
                     android:id="@+id/search_Load"
+                    android:textAllCaps="true"
                     android:layout_height="wrap_content"
                     android:hint="Load in Tonnes">
 
@@ -117,6 +120,7 @@
                     android:layout_width="match_parent"
                     android:id="@+id/search_Passenger_count"
                     android:singleLine="true"
+                    android:textAllCaps="true"
                     android:inputType="number"
                     android:layout_height="wrap_content"
                     android:hint="Passenger Count">

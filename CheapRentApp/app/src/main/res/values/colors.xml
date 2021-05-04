@@ -10,5 +10,15 @@
     <color name="activitybackground">#FECE2F</color>
     <color name="green">#15E81D</color>
     <color name="light_green">#80ED85</color>
+
+
+    <color name="selectedIconcolor">#FECE2F</color>
+    <color name="dafaulticoncolor">#F6F6F6</color>
+    <color name="counttextColor">#fff</color>
+    <color name="countbackgroundcolor">#f45e08</color>
+    <color name="cirlcecolor">#fff</color>
+    <color name="backgroundbottomcolor">#FECE2F</color>
+    <color name="shadowcolor">#2E2E2E</color>
+
     
 </resources>

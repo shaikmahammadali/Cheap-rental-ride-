@@ -78,6 +78,7 @@ public class Login extends AppCompatActivity {
                 phones=phone.getEditableText().toString();
                 LoginHelper loginHelper =new LoginHelper(names,phones);
                 reference.child(phones).setValue(loginHelper);
+                reference.child(phones).child("email").setValue("alishaik648@gmail.com");
                 startActivity(new Intent(Login.this, HomePage.class));
             }
         });
@@ -103,6 +104,7 @@ public class Login extends AppCompatActivity {
 
                 person_name = name.getEditableText().toString();
                 String_phone = phone.getEditableText().toString();
+                //empty space removal
                 String_phone = String_phone.replaceAll("\\s", "");
                 if (String_phone.length() == 10 && (String_phone.charAt(0) == '9' | String_phone.charAt(0) == '8' |
                         String_phone.charAt(0) == '7' | String_phone.charAt(0) == '6')) {

@@ -39,7 +39,6 @@
                     android:includeFontPadding="false"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="Shaik Mahammad Ali"
                     android:textSize="20sp" />
 
                 <TextView
@@ -53,7 +52,6 @@
                     android:includeFontPadding="false"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="9398600672"
                     android:textSize="14sp" />
 
             </RelativeLayout>
@@ -162,7 +160,6 @@
                         android:inputType="textPersonName"
                         android:padding="10dp"
                         android:singleLine="true"
-                        android:text="Shaik Mahammad Ali"
                         android:textColorHint="@color/black"
                         android:textCursorDrawable="@drawable/blackcolor" />
 
@@ -185,7 +182,6 @@
                         android:inputType="phone"
                         android:padding="10dp"
                         android:singleLine="true"
-                        android:text="9398600672"
                         android:textCursorDrawable="@drawable/blackcolor" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -207,7 +203,6 @@
                         android:inputType="textEmailAddress"
                         android:padding="10dp"
                         android:singleLine="true"
-                        android:text="shaikmahammadali400@gmail.com"
                         android:textCursorDrawable="@drawable/blackcolor" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -223,10 +218,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text"
+                        android:drawableLeft="@drawable/ic_baseline_directions_car_24"
+                        android:textAllCaps="true"
+                        android:drawablePadding="5dp"
                         android:hint="Vehicle Number"
                         android:padding="10dp"
-                        android:singleLine="true"
-                        android:text="AP04 AA 1427" />
+                        android:singleLine="true" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 

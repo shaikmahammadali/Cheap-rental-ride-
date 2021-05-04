@@ -32,6 +32,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.util.regex.Pattern;
+
 
 public class Profile extends Fragment {
     private DatabaseReference reference;
@@ -39,7 +41,7 @@ public class Profile extends Fragment {
     TextInputEditText e_fullname,e_phone,e_Email,E_vehicle_number;
     MaterialButton edit,update,signout;
     Query checkUser;
-    String Full_name , phone , Email,vehicle_number;
+    String Full_name ,phone, Email,vehicle_number;
 
     public Profile() {
     }
@@ -66,6 +68,8 @@ public class Profile extends Fragment {
         E_vehicle_number= profileview.findViewById(R.id.Vehicle_Number);
         edit=profileview.findViewById(R.id.profile_edit);
         update=profileview.findViewById(R.id.profile_update);
+        Email=e_Email.getText().toString();
+        vehicle_number=E_vehicle_number.getText().toString();
 
         // query checking
         checkUser=reference.orderByChild("phone").equalTo(phone);
@@ -78,6 +82,15 @@ public class Profile extends Fragment {
                     pro_phone.setText(phone);
                     e_fullname.setText(Full_name);
                     e_phone.setText(phone);
+                    if(snapshot.child(phone).child("email").exists())
+                        e_Email.setText(snapshot.child(phone).child("email").getValue(String.class));
+                    else
+                        e_Email.setText("");
+                    if (snapshot.child(phone).child("vehicle_number").exists())
+                        E_vehicle_number.setText(snapshot.child(phone).child("vehicle_number").getValue(String.class));
+                    else
+                        E_vehicle_number.setText("");
+
 
                 }
             }
@@ -90,18 +103,19 @@ public class Profile extends Fragment {
         });
 
         //disable edittext
-        disabledEditText(e_fullname);
-        disabledEditText(e_phone);
-        disabledEditText(e_phone);
-        disabledEditText(e_Email);
-        disabledEditText(E_vehicle_number);
+        deActive_EditText(e_fullname);
+        deActive_EditText(e_phone);
+        deActive_EditText(e_phone);
+        deActive_EditText(e_Email);
+        deActive_EditText(E_vehicle_number);
 
         //edit profile
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                enableEditText(e_Email);
-                enableEditText(E_vehicle_number);
+                active_EditText(e_Email);
+                active_EditText(E_vehicle_number);
+                active_EditText(e_fullname);
                 Toast.makeText(getActivity(), "Edit Profile Now", Toast.LENGTH_SHORT).show();
 
             }
@@ -111,11 +125,38 @@ public class Profile extends Fragment {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                disabledEditText(e_Email);
-                disabledEditText(E_vehicle_number);
-                Toast.makeText(getActivity(), "Profile Updated", Toast.LENGTH_SHORT).show();
-                // add data to firebase
+                Email=e_Email.getText().toString();
+                vehicle_number=E_vehicle_number.getText().toString();
+                Full_name=e_fullname.getText().toString();
+                if(isEmailValid(Email)){
+                    if (isVehicleNumberValid(vehicle_number)){
+                        boolean email_status =reference.child(phone).child("email").setValue(Email).isSuccessful();
+                        boolean v_status =reference.child(phone).child("vehicle_number").setValue(vehicle_number).isSuccessful();
+                        boolean name_status=reference.child(phone).child("name").setValue(Full_name).isSuccessful();
+                        if (!( email_status && v_status && name_status)){
+                            Toast.makeText(getActivity(), "Profile Updated", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                            Toast.makeText(getActivity(), "Profile NOT Updated ", Toast.LENGTH_SHORT).show();
+                        deActive_EditText(e_Email);
+                        deActive_EditText(E_vehicle_number);
+                        deActive_EditText(e_fullname);
+                    }
+                    else{
+                        E_vehicle_number.setError("INVALID VEHICLE");
+                        active_EditText(E_vehicle_number);
+                        active_EditText(e_Email);
+                    }
+
+                }
+                else{
+                    e_Email.setError("INVALID EMAIL FORMAT");
+                    active_EditText(E_vehicle_number);
+                    active_EditText(e_Email);
+                }
+
             }
+
         });
 
         //signout operation
@@ -139,19 +180,57 @@ public class Profile extends Fragment {
     }
     public void disabledEditText(TextInputEditText editText){
         /*editText.setFocusable(false);*/
-        editText.setEnabled(false);
-        editText.setCursorVisible(false);
-        editText.setBackgroundColor(Color.TRANSPARENT);
+
+        editText.setVisibility(View.INVISIBLE);
 
 
     }
     public void enableEditText(TextInputEditText editText){
         /*editText.setFocusable(true);*/
-        editText.setEnabled(true);
-        editText.setCursorVisible(true);
-        editText.setFocusable(true);
+
+        editText.setVisibility(View.VISIBLE);
         /*editText.setBackgroundColor(Color.WHITE);*/
 
     }
 
+    private void active_EditText(TextInputEditText editText){
+        editText.setEnabled(true);
+        editText.setCursorVisible(true);
+        editText.setFocusable(true);
+    }
+
+    private void deActive_EditText(TextInputEditText editText){
+        editText.setEnabled(false);
+        editText.setCursorVisible(false);
+        editText.setBackgroundColor(Color.TRANSPARENT);
+    }
+    // email validation
+    private boolean isEmailValid(String email)
+    {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
+
+        Pattern pat = Pattern.compile(emailRegex);
+        if (email == null) {
+            e_Email.setError("EMAIL IS EMPTY");
+            return false;
+        }
+        return pat.matcher(email).matches();
+    }
+
+    //IS vehicle Number
+    private boolean isVehicleNumberValid(String vehicle_Number){
+        int len=vehicle_Number.length();
+        if (len==10 || len==12)
+            return true;
+        else
+            return false;
+
+    }
+
+    public String spaceRemove(String str){
+        return str.replaceAll("\\s", "");
+    }
 }

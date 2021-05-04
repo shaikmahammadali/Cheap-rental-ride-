@@ -5,7 +5,7 @@ public class LoginHelper {
 
     public LoginHelper(String name, String phone) {
         this.name = name;
-        Phone = phone;
+        this.Phone = phone;
     }
 
     public String getName() {

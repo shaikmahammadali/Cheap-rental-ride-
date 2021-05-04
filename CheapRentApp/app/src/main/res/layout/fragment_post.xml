@@ -32,7 +32,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:singleLine="true"
-                    android:inputType="text"
+                    android:inputType="textCapCharacters"
+                    android:textAllCaps="true"
                     android:id="@+id/post_source"
                     android:layout_height="wrap_content"
                     android:hint="Source">
@@ -50,8 +51,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:id="@+id/post_destination"
-                    android:inputType="text"
+                    android:inputType="textCapCharacters"
                     android:singleLine="true"
+                    android:textAllCaps="true"
                     android:layout_height="wrap_content"
                     android:hint="Destination">
 
@@ -98,13 +100,14 @@
                 android:layout_height="match_parent"
                 app:boxStrokeColor="@color/black"
                 app:boxStrokeWidth="3dp">
+
                 <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:inputType="numberDecimal"
-                    android:singleLine="true"
                     android:id="@+id/post_Load"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Load in Tonnes">
+                    android:hint="Load in Tonnes"
+                    android:inputType="numberDecimal"
+                    android:singleLine="true">
 
                 </com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
@@ -140,12 +143,14 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textAllCaps="true"
+                android:inputType="textCapCharacters"
                 android:id="@+id/post_vehicle_name"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
             app:boxStrokeColor="@color/black"
             app:boxStrokeWidth="3dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -153,11 +158,12 @@
             app:hintTextColor="@color/black">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:inputType="text"
+                android:layout_height="wrap_content"
+                android:inputType="textCapSentences"
                 android:gravity="start"
                 android:id="@+id/post_vehicle_description"/>
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.button.MaterialButton
             android:layout_width="200dp"
             android:layout_height="wrap_content"
@@ -168,6 +174,37 @@
             android:text="Post"
             android:background="@color/activitybackground"
             android:textColor="@color/black"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_marginRight="20dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/Active_posts"
+                android:text="Active posts"
+                android:textColor="@color/black"
+                android:background="@color/activitybackground"/>
+
+            <com.google.android.material.button.MaterialButton
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+                android:layout_marginLeft="20dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/deActive_posts"
+            android:text="Deactive posts"
+            android:textColor="@color/black"
+            android:background="@color/activitybackground"/>
+
+
+
+        </LinearLayout>
+
     </LinearLayout>
     </ScrollView>
 
