@@ -10,13 +10,26 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cheaprentalrides.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ServerValue;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 
 public class Post extends Fragment {
@@ -24,9 +37,12 @@ public class Post extends Fragment {
     RadioGroup rg_post_vehivle_type;
     RadioButton rb_load, rb_passengers;
     DatabaseReference reference;
-    MaterialButton post,active_posts,deactive_posts;
+    MaterialButton post,active_posts,deleted_posts;
     String str_source, str_destination, str_vehicle_type, str_vehicle_name, str_vehicle_details,phone;
     float float_vehicle_load;
+    RecyclerView recyclerView;
+    PostsRecyclerviewAdapter postsRecyclerviewAdapter;
+    List<PostPojo> postslist;
 
     public Post() {
 
@@ -46,26 +62,12 @@ public class Post extends Fragment {
         vehicle_des = view.findViewById(R.id.post_vehicle_description);
         rb_load = view.findViewById(R.id.rb_load_vehicle);
         rb_passengers = view.findViewById(R.id.rb_passenger);
-        active_posts=view.findViewById(R.id.active_posts);
-        deactive_posts=view.findViewById(R.id.deActive_posts);
         post = view.findViewById(R.id.post);
         rg_post_vehivle_type = view.findViewById(R.id.rg_post_vehcle_type);
+        active_posts=view.findViewById(R.id.Active_posts);
+        deleted_posts=view.findViewById(R.id.deleted_posts);
 
-        //deactive posts
-        deactive_posts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
-
-        // avtivate posts
-        active_posts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         // getting user id from shared preference
         SharedPreferences prefs =  getActivity().getSharedPreferences("Loginid",
@@ -73,7 +75,7 @@ public class Post extends Fragment {
         phone = prefs.getString("phone", null);
 
         // firebase Registertaion
-        reference = FirebaseDatabase.getInstance().getReference("users").child(phone).child("post").child("active").push();
+        reference = FirebaseDatabase.getInstance().getReference("users").child(phone).child("post").child("active");
 
         // radio group listener
         rg_post_vehivle_type.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -120,10 +122,13 @@ public class Post extends Fragment {
                                 if (!str_vehicle_details.isEmpty()) {
 
                                     // push data to firebase
+
                                     PostPojo postPojo = new PostPojo(str_source, str_destination, str_vehicle_type,
                                             float_vehicle_load, str_vehicle_name, str_vehicle_details);
-                                    if ( ! reference.setValue(postPojo).isSuccessful())
+                                    if ( ! reference.push().setValue(postPojo).isSuccessful()) {
                                         Toast.makeText(getActivity(), "Post gets Uploaded", Toast.LENGTH_SHORT).show();
+                                        getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new Post()).commit();
+                                    }
                                     else
                                         Toast.makeText(getActivity(), " Post NOT Uploaded\n Technical Error", Toast.LENGTH_SHORT).show();
 
@@ -142,6 +147,48 @@ public class Post extends Fragment {
                     }
                 } else
                     source.setError("Enter Source");
+
+            }
+        });
+
+
+        //deactive posts
+        deleted_posts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                DatabaseReference reference=FirebaseDatabase.getInstance()
+                        .getReference("users").child(phone).child("post");
+                reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.hasChild("deletedposts")){
+                            getFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new DeletedPost()).commit();
+                            Toast.makeText(getActivity(), "DeActivated posts", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(getActivity(), "No Deleted Posts", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+
+            }
+        });
+
+        // avtivate posts
+        active_posts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Active posts", Toast.LENGTH_SHORT).show();
+                getFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new ActivePosts()).commit();
 
             }
         });

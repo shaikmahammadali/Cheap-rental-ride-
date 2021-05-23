@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    android:background="@color/activitybackground"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="hyderbad"
+            android:id="@+id/source"
+            android:textSize="25sp"
+            android:textAllCaps="true"
+            android:layout_weight="0.4"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:layout_weight="0.4"
+            android:textAllCaps="true"
+            android:text="tirupati"
+            android:id="@+id/destination"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vehicle Name : "
+        android:textSize="20sp"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:layout_margin="10dp"
+        android:id="@+id/vehicle_name"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="load : "
+        android:textAllCaps="true"
+        android:textSize="20sp"
+        android:layout_weight="0.8"
+        android:textColor="@color/black"
+        android:layout_margin="10dp"
+        android:id="@+id/load"/>
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_weight="0.2"
+            android:layout_height="50dp"
+            android:id="@+id/delete"
+            android:background="@drawable/ic_baseline_delete_24"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="VEHICLE DETAILS :\n\t\t\t\t"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:layout_margin="10dp"
+        android:id="@+id/vehicle_description"/>
+
+
+</LinearLayout>

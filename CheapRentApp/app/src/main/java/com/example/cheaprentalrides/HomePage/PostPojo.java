@@ -1,8 +1,25 @@
 package com.example.cheaprentalrides.HomePage;
 
+import java.util.Map;
+
 public class PostPojo {
 
-    String source,destination,vehicle_type,vehicle_name,vehicle_details;
+    String source;
+    String destination;
+    String vehicle_type;
+    String vehicle_name;
+    String vehicle_details;
+    /*Map<String, String> timestamp;*/
+
+
+    /*public Map<String, String> getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Map<String, String> timestamp) {
+        this.timestamp = timestamp;
+    }*/
+
     float vehicle_load;
 
     public PostPojo(String source, String destination, String vehicle_type, float vehicle_load, String vehicle_name, String vehicle_details) {
@@ -12,7 +29,9 @@ public class PostPojo {
         this.vehicle_load = vehicle_load;
         this.vehicle_name = vehicle_name;
         this.vehicle_details = vehicle_details;
+        /*this.timestamp=timestamp;*/
     }
+    public PostPojo(){}
 
     public String getSource() {
         return source;

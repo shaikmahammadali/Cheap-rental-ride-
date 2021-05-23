@@ -3,6 +3,7 @@
     package="com.example.cheaprentalrides">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="Manifest.android.permission.BIND_INPUT_METHOD"/>
 
     <application
         android:allowBackup="true"
@@ -11,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CheapRentalRides">
-        <activity android:name=".HomePage.HomePage"></activity>
+        <activity android:name=".HomePage.HomePage"
+            ></activity>
 
         <activity android:name=".UserLogin.Login" />
         <activity

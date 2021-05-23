@@ -172,6 +172,7 @@
             android:layout_marginTop="30dp"
             android:layout_gravity="center"
             android:text="Post"
+            app:cornerRadius="14dp"
             android:background="@color/activitybackground"
             android:textColor="@color/black"/>
         <LinearLayout
@@ -187,6 +188,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/Active_posts"
+                app:cornerRadius="14dp"
                 android:text="Active posts"
                 android:textColor="@color/black"
                 android:background="@color/activitybackground"/>
@@ -196,8 +198,10 @@
             android:layout_weight="0.5"
                 android:layout_marginLeft="20dp"
             android:layout_height="wrap_content"
-            android:id="@+id/deActive_posts"
-            android:text="Deactive posts"
+            android:id="@+id/deleted_posts"
+            android:text="Deleted posts"
+                app:cornerRadius="14dp"
+
             android:textColor="@color/black"
             android:background="@color/activitybackground"/>
 

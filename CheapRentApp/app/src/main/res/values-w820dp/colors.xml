@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="green">#15E81D</color>
     <color name="my_menu_badge_color">#F11B0B</color>
     <color name="my_menu_unselected_color">#695F5F</color>
 </resources>

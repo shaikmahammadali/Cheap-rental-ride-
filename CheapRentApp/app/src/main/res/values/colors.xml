@@ -19,6 +19,8 @@
     <color name="cirlcecolor">#fff</color>
     <color name="backgroundbottomcolor">#FECE2F</color>
     <color name="shadowcolor">#2E2E2E</color>
+    <color name="my_menu_badge_color">#F11B0B</color>
+    <color name="my_menu_unselected_color">#807272</color>
 
-    
+
 </resources>

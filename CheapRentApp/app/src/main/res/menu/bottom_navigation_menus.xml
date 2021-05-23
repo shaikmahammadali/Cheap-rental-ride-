@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/srch"
+        android:title="Search"
+        android:icon="@drawable/ic_baseline_search_24"
+        app:cnb_iconColor="#000"
+        app:cnb_textColor="#000"
+        app:cnb_backgroundColor="@color/white"
+        />
+    <item
+        android:id="@+id/pst"
+        android:title="Post"
+        android:icon="@drawable/ic_baseline_add_circle_24"
+        app:cnb_iconColor="#000"
+        app:cnb_textColor="#000"
+        app:cnb_backgroundColor="@color/white"
+        />
+    <item
+        android:id="@+id/profle"
+        android:title="Profile"
+        android:icon="@drawable/ic_baseline_person_24"
+        app:cnb_iconColor="#000"
+        app:cnb_textColor="#000"
+        app:cnb_backgroundColor="@color/white"
+        />
+
+</menu>

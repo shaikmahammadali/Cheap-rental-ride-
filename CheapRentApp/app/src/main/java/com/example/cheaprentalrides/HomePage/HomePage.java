@@ -1,3 +1,4 @@
+
 package com.example.cheaprentalrides.HomePage;
 
 import androidx.annotation.NonNull;
@@ -24,14 +25,14 @@ import android.widget.Toast;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.cheaprentalrides.R;
 import com.google.android.material.tabs.TabLayout;
+import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 public class HomePage extends AppCompatActivity {
-    /*private ViewPager viewPager;
-    private TabLayout tabLayout;*/
+
     private final int ID_SEARCH=0,ID_POST=1,ID_PROFILE=2;
     private String []tabs={"SEARCH","POST","PROFILE"};
-    MeowBottomNavigation bottomNavigation;
-
+    private ChipNavigationBar chipNavigationBar;
+    private Fragment fragment;
     public HomePage() {
 
     }
@@ -40,85 +41,32 @@ public class HomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
-        /*tabLayout=findViewById(R.id.tablayout);
-        viewPager=findViewById(R.id.viewpager);
-        SharedPreferences prefs =  getApplicationContext().getSharedPreferences("Loginid",
-                Context.MODE_PRIVATE);
-        phone_userid = prefs.getString("phone", null);
-        *//*Log.i("number",phone_userid);*//*
-        ViewPagerAdapter viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(viewPagerAdapter);
-        tabLayout.setupWithViewPager(viewPager);*/
-        bottomNavigation=findViewById(R.id.botton_navigator);
+        chipNavigationBar=findViewById(R.id.chipnavigation);
 
-        bottomNavigation.add(new MeowBottomNavigation.Model(ID_SEARCH,R.drawable.ic_baseline_search_24));
-        bottomNavigation.add(new MeowBottomNavigation.Model(ID_POST,R.drawable.ic_baseline_add_circle_24));
-        bottomNavigation.add((new MeowBottomNavigation.Model(ID_PROFILE,R.drawable.ic_baseline_person_24)));
-        bottomNavigation.setOnShowListener(new MeowBottomNavigation.ShowListener() {
+        //default fragment
+        chipNavigationBar.setItemSelected(R.id.srch,true);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new Search()).commit();
+
+        chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
             @Override
-            public void onShowItem(MeowBottomNavigation.Model item) {
-                //fragment initilization
-                Toast.makeText(HomePage.this, tabs[item.getId()], Toast.LENGTH_SHORT).show();
-                Fragment fragment=null;
+            public void onItemSelected(int i) {
+                switch (i){
+                    case R.id.srch : // when id is 0 Initilize search fragment
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new Search()).commit();
+                        break;
+                    case R.id.pst : // when id is 1 Initilize post fragment
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new Post()).commit();
+                        break;
+                    case R.id.profle : // when id is 2 Initilize Profile fragment
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new Profile()).commit();
+                        break;
 
-                //check condition
-                switch (item.getId()){
-                    case ID_SEARCH : // when id is 0 Initilize search fragment
-                        fragment=new Search();
-                        break;
-                    case ID_POST : // when id is 1 Initilize post fragment
-                        fragment=new Post();
-                        break;
-                    case ID_PROFILE : // when id is 2 Initilize Profile fragment
-                        fragment =new Profile();
-                        break;
                 }
-                loadFragment(fragment);
-
 
             }
         });
-        //set search fragment initially selected
-        bottomNavigation.show(ID_SEARCH,true);
-        bottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
-            @Override
-            public void onClickItem(MeowBottomNavigation.Model item) {
-                Toast.makeText(HomePage.this, tabs[item.getId()], Toast.LENGTH_SHORT).show();
-                Fragment fragment=null;
-
-                //check condition
-                switch (item.getId()){
-                    case ID_SEARCH : // when id is 0 Initilize search fragment
-                        fragment=new Search();
-                        break;
-                    case ID_POST : // when id is 1 Initilize post fragment
-                        fragment=new Post();
-                        break;
-                    case ID_PROFILE : // when id is 2 Initilize Profile fragment
-                        fragment =new Profile();
-                        break;
-                }
-                loadFragment(fragment);
-
-            }
-        });
-
-        bottomNavigation.setOnReselectListener(new MeowBottomNavigation.ReselectListener() {
-            @Override
-            public void onReselectItem(MeowBottomNavigation.Model item) {
-                Toast.makeText(HomePage.this, "You Reselected "+tabs[item.getId()] , Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
     }
 
-    private void loadFragment(Fragment fragment) {
-        //replace fragment
-        getSupportFragmentManager()
-                .beginTransaction()
-                 .replace(R.id.framelayout,fragment).commit();
 
-    }
 }
 

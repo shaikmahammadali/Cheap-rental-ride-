@@ -1,34 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".HomePage.HomePage">
 
+    <com.ismaeldivita.chipnavigation.ChipNavigationBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/chipnavigation"
+        app:cnb_menuResource="@menu/bottom_navigation_menus"
+        app:cnb_orientationMode="horizontal"
+        android:background="@color/activitybackground"
+        app:cnb_addBottomInset="false"
+        app:cnb_addLeftInset="false"
+        app:cnb_addRightInset="false"
+        app:cnb_addTopInset="false"
+        app:cnb_unselectedColor="@color/my_menu_unselected_color"
+        app:cnb_badgeColor="@color/my_menu_badge_color"
+        app:cnb_radius="25dp"
+        app:cnb_iconSize="30dp"
+        android:padding="8dp"
+        />
+
+
+        />
+
+        />
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:id="@+id/framelayout"
-        android:gravity="center">
+        android:id="@+id/fragmentContainer"
+        android:layout_above="@+id/chipnavigation"/>
 
-    </FrameLayout>
-
-    <com.etebarian.meowbottomnavigation.MeowBottomNavigation
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:id="@+id/botton_navigator"
-        app:mbn_shadowColor="@color/shadowcolor"
-        app:mbn_circleColor="@color/cirlcecolor"
-        app:mbn_backgroundBottomColor="@color/backgroundbottomcolor"
-        app:mbn_countBackgroundColor="@color/countbackgroundcolor"
-        app:mbn_countTextColor="@color/counttextColor"
-        app:mbn_defaultIconColor="@color/dafaulticoncolor"
-        app:mbn_selectedIconColor="@color/selectedIconcolor"/>
-
-
-
-</LinearLayout>
+</RelativeLayout>
