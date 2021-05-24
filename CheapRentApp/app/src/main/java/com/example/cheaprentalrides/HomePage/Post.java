@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cheaprentalrides.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,8 +29,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 
 public class Post extends Fragment {
@@ -37,12 +40,15 @@ public class Post extends Fragment {
     RadioGroup rg_post_vehivle_type;
     RadioButton rb_load, rb_passengers;
     DatabaseReference reference;
+    String postid;
     MaterialButton post,active_posts,deleted_posts;
     String str_source, str_destination, str_vehicle_type, str_vehicle_name, str_vehicle_details,phone;
     float float_vehicle_load;
     RecyclerView recyclerView;
     PostsRecyclerviewAdapter postsRecyclerviewAdapter;
     List<PostPojo> postslist;
+    FirebaseAuth mAuth;
+    String current_userid;
 
     public Post() {
 
@@ -67,7 +73,8 @@ public class Post extends Fragment {
         active_posts=view.findViewById(R.id.Active_posts);
         deleted_posts=view.findViewById(R.id.deleted_posts);
 
-
+        mAuth=FirebaseAuth.getInstance();
+        current_userid=mAuth.getCurrentUser().getUid();
 
         // getting user id from shared preference
         SharedPreferences prefs =  getActivity().getSharedPreferences("Loginid",
@@ -121,11 +128,25 @@ public class Post extends Fragment {
 
                                 if (!str_vehicle_details.isEmpty()) {
 
+                                    Calendar calFordDate = Calendar.getInstance();
+                                    SimpleDateFormat currentDate = new SimpleDateFormat("dd-MMM-yyyy", Locale.US);
+                                    String saveCurrentDate = currentDate.format(calFordDate.getTime());
+
+                                    Calendar calFordTime = Calendar.getInstance();
+                                    SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm:ss");
+                                    String saveCurrentTime = currentTime.format(calFordDate.getTime());
+
+                                    String postRandomName = saveCurrentDate + saveCurrentTime;
+
+
+
                                     // push data to firebase
 
                                     PostPojo postPojo = new PostPojo(str_source, str_destination, str_vehicle_type,
-                                            float_vehicle_load, str_vehicle_name, str_vehicle_details);
-                                    if ( ! reference.push().setValue(postPojo).isSuccessful()) {
+                                            float_vehicle_load, str_vehicle_name, str_vehicle_details,postid=current_userid+postRandomName);
+                                    if ( ! reference.child(postid).setValue(postPojo).isSuccessful()) {
+
+
                                         Toast.makeText(getActivity(), "Post gets Uploaded", Toast.LENGTH_SHORT).show();
                                         getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new Post()).commit();
                                     }
@@ -200,7 +221,7 @@ public class Post extends Fragment {
                         }
                         else
                         {
-                            Toast.makeText(getActivity(), "No Deleted Posts", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "No Active Posts", Toast.LENGTH_SHORT).show();
                         }
 
                     }

@@ -44,6 +44,9 @@ public class ActivePosts extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
        view=inflater.inflate(R.layout.fragment_active_posts, container, false);
+
+
+
         SharedPreferences prefs =  getActivity().getSharedPreferences("Loginid",
                 Context.MODE_PRIVATE);
         phone = prefs.getString("phone", null);

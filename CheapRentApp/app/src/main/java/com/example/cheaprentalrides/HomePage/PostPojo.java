@@ -9,6 +9,15 @@ public class PostPojo {
     String vehicle_type;
     String vehicle_name;
     String vehicle_details;
+    String postid;
+
+    public String getPostid() {
+        return postid;
+    }
+
+    public void setPostid(String postid) {
+        this.postid = postid;
+    }
     /*Map<String, String> timestamp;*/
 
 
@@ -22,13 +31,14 @@ public class PostPojo {
 
     float vehicle_load;
 
-    public PostPojo(String source, String destination, String vehicle_type, float vehicle_load, String vehicle_name, String vehicle_details) {
+    public PostPojo(String source, String destination, String vehicle_type, float vehicle_load, String vehicle_name, String vehicle_details,String postid) {
         this.source = source;
         this.destination = destination;
         this.vehicle_type = vehicle_type;
         this.vehicle_load = vehicle_load;
         this.vehicle_name = vehicle_name;
         this.vehicle_details = vehicle_details;
+        this.postid=postid;
         /*this.timestamp=timestamp;*/
     }
     public PostPojo(){}
