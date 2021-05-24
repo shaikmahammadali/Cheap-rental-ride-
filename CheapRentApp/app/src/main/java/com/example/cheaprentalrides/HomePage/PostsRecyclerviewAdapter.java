@@ -4,13 +4,16 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,18 +21,23 @@ import com.example.cheaprentalrides.R;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import java.util.List;
 
-public class PostsRecyclerviewAdapter extends RecyclerView.Adapter<PostsRecyclerviewAdapter.PostHolder> {
+public class PostsRecyclerviewAdapter extends RecyclerView.Adapter<PostsRecyclerviewAdapter.PostHolder>  {
 
     Context ctx;
     List<PostPojo> postslist;
-
+    DatabaseReference reference;
+    String phone;
 
     public PostsRecyclerviewAdapter(Context ctx, List<PostPojo> postslist) {
         this.ctx = ctx;
         this.postslist = postslist;
+
+
+
     }
 
 
@@ -58,13 +66,30 @@ public class PostsRecyclerviewAdapter extends RecyclerView.Adapter<PostsRecycler
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                SharedPreferences prefs =  v.getContext().getSharedPreferences("Loginid",
+                        Context.MODE_PRIVATE);
+                phone = prefs.getString("phone", null);
+
+                Toast.makeText(v.getContext(), "delete", Toast.LENGTH_SHORT).show();
                 AlertDialog.Builder builder=new AlertDialog.Builder(v.getContext());
+                builder.setTitle("Post Deletion");
                 builder.setMessage("Are you sure to delete the Post");
                 builder.setIcon(R.drawable.ic_baseline_warning_24);
                 // positive button
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        reference=FirebaseDatabase.getInstance().getReference("users").child(phone).child("post");
+                        reference.child("active");
+                        holder.get
+
+
+
+                        postslist.remove(holder.getAdapterPosition());
+                        notifyItemRemoved(holder.getAdapterPosition());
+                        notifyItemRangeChanged(holder.getAdapterPosition(),postslist.size());
+
 
 
 
@@ -77,8 +102,8 @@ public class PostsRecyclerviewAdapter extends RecyclerView.Adapter<PostsRecycler
                         dialog.dismiss();
                     }
                 });
-                AlertDialog alertDialog=new AlertDialog.Builder(v.getContext()).create();
-                alertDialog.show();
+                builder.create().show();
+
 
 
 

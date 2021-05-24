@@ -164,7 +164,7 @@ public class Post extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.hasChild("deletedposts")){
                             getFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new DeletedPost()).commit();
-                            Toast.makeText(getActivity(), "DeActivated posts", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Deleted Posts posts", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
@@ -187,8 +187,31 @@ public class Post extends Fragment {
         active_posts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Active posts", Toast.LENGTH_SHORT).show();
-                getFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new ActivePosts()).commit();
+                DatabaseReference reference=FirebaseDatabase.getInstance()
+                        .getReference("users").child(phone).child("post");
+
+                reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        if (snapshot.hasChild("active")){
+                            getFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new ActivePosts()).commit();
+                            Toast.makeText(getActivity(), "Active posts", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(getActivity(), "No Deleted Posts", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
 
             }
         });

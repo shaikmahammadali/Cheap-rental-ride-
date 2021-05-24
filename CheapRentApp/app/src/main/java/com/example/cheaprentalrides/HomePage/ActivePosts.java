@@ -62,7 +62,7 @@ public class ActivePosts extends Fragment {
 
                 recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
                 recyclerView.setAdapter(postsRecyclerviewAdapter);
-                Toast.makeText(getActivity(), "Active posts"+postslist.size(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Active posts "+postslist.size(), Toast.LENGTH_SHORT).show();
 
 
             }

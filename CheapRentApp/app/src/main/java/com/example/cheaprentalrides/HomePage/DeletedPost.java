@@ -28,6 +28,7 @@ import java.util.List;
 public class DeletedPost extends Fragment {
 
     RecyclerView recyclerView;
+    View view;
     private String phone;
     private DatabaseReference reference;
     private List<PostPojo> postslist;
@@ -41,12 +42,12 @@ public class DeletedPost extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_deleted_post, container, false);
+        view=inflater.inflate(R.layout.fragment_deleted_post, container, false);
         SharedPreferences prefs =  getActivity().getSharedPreferences("Loginid",
                 Context.MODE_PRIVATE);
         phone = prefs.getString("phone", null);
         reference = FirebaseDatabase.getInstance().getReference("users").child(phone).child("post").child("deletedposts");
-        recyclerView=view.findViewById(R.id.recyclerview);
+        recyclerView=view.findViewById(R.id.deletedrecyclerview);
         
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -61,7 +62,7 @@ public class DeletedPost extends Fragment {
 
                 recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
                 recyclerView.setAdapter(deletedPostsRecyclerViewAdapter);
-                Toast.makeText(getActivity(), "Active posts"+postslist.size(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Deleted Posts "+postslist.size(), Toast.LENGTH_SHORT).show();
                 
             }
 
