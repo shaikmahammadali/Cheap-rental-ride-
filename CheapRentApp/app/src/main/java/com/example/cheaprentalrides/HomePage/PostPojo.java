@@ -10,6 +10,15 @@ public class PostPojo {
     String vehicle_name;
     String vehicle_details;
     String postid;
+    String phone;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public String getPostid() {
         return postid;
@@ -31,7 +40,7 @@ public class PostPojo {
 
     float vehicle_load;
 
-    public PostPojo(String source, String destination, String vehicle_type, float vehicle_load, String vehicle_name, String vehicle_details,String postid) {
+    public PostPojo(String source, String destination, String vehicle_type, float vehicle_load, String vehicle_name, String vehicle_details,String postid,String phone) {
         this.source = source;
         this.destination = destination;
         this.vehicle_type = vehicle_type;
@@ -39,6 +48,7 @@ public class PostPojo {
         this.vehicle_name = vehicle_name;
         this.vehicle_details = vehicle_details;
         this.postid=postid;
+        this.phone=phone;
         /*this.timestamp=timestamp;*/
     }
     public PostPojo(){}

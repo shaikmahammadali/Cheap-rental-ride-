@@ -33,6 +33,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:textColor="@color/black"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/profile_image"
                     android:fontFamily="@font/bangers"
@@ -47,6 +48,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/profile_fullname"
                     android:layout_centerVertical="true"
+                    android:textColor="@color/black"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/profile_image"
                     android:includeFontPadding="false"
@@ -82,17 +84,18 @@
                             android:layout_centerHorizontal="true"
                             android:fontFamily="@font/bangers"
                             android:padding="10dp"
+                            android:textColor="@color/black"
                             android:text="Active Posts" />
 
                         <TextView
-                            android:id="@+id/active_posts"
+                            android:id="@+id/activeposts"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/active"
                             android:layout_centerInParent="true"
-                            android:fontFamily="@font/bangers"
                             android:padding="10dp"
-                            android:text="12"
+                            android:textColor="@color/black"
+                            android:text="0"
                             android:textSize="20sp" />
 
                     </RelativeLayout>
@@ -118,17 +121,19 @@
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
                             android:fontFamily="@font/bangers"
+                            android:textColor="@color/black"
                             android:padding="10dp"
-                            android:text="Deactive Posts" />
+                            android:text="Deleted Posts" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/Deactive"
                             android:layout_centerInParent="true"
-                            android:fontFamily="@font/bangers"
                             android:padding="10dp"
-                            android:text="4"
+                            android:textColor="@color/black"
+                            android:text="0"
+                            android:id="@+id/deletedposts"
                             android:textSize="20sp" />
 
                     </RelativeLayout>

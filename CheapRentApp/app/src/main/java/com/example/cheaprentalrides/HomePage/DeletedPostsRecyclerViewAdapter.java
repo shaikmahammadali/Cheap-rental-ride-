@@ -29,7 +29,8 @@ public class DeletedPostsRecyclerViewAdapter extends RecyclerView.Adapter<Delete
     @NonNull
     @Override
     public DeletedPostsRecyclerViewAdapter.DeletedPostHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new DeletedPostHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.posts_row_design,parent,false)) ;
+        return new DeletedPostHolder(LayoutInflater.from(parent.getContext()).
+                inflate(R.layout.posts_row_design,parent,false)) ;
     }
 
     @Override
@@ -44,7 +45,7 @@ public class DeletedPostsRecyclerViewAdapter extends RecyclerView.Adapter<Delete
             holder.load.setText("Load : "+String.valueOf(deletedpostlist.get(position).getVehicle_load())+" Tonnes");
         }
         else {
-            holder.load.setText("Passengers : "+String.valueOf(deletedpostlist.get(position).getVehicle_load()));
+            holder.load.setText("Passengers : "+String.valueOf((int)deletedpostlist.get(position).getVehicle_load()));
         }
         holder.delete.setVisibility(View.GONE);
         

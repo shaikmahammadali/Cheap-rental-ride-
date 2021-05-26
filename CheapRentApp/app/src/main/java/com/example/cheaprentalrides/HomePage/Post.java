@@ -143,7 +143,7 @@ public class Post extends Fragment {
                                     // push data to firebase
 
                                     PostPojo postPojo = new PostPojo(str_source, str_destination, str_vehicle_type,
-                                            float_vehicle_load, str_vehicle_name, str_vehicle_details,postid=current_userid+postRandomName);
+                                            float_vehicle_load, str_vehicle_name, str_vehicle_details,postid=current_userid+postRandomName,phone);
                                     if ( ! reference.child(postid).setValue(postPojo).isSuccessful()) {
 
 
@@ -184,7 +184,8 @@ public class Post extends Fragment {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.hasChild("deletedposts")){
-                            getFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new DeletedPost()).commit();
+                            getFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new DeletedPost()).
+                                    addToBackStack(null).commit();
                             Toast.makeText(getActivity(), "Deleted Posts posts", Toast.LENGTH_SHORT).show();
                         }
                         else
@@ -216,7 +217,8 @@ public class Post extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                         if (snapshot.hasChild("active")){
-                            getFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new ActivePosts()).commit();
+                            getFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new ActivePosts())
+                                    .addToBackStack(null).commit();
                             Toast.makeText(getActivity(), "Active posts", Toast.LENGTH_SHORT).show();
                         }
                         else

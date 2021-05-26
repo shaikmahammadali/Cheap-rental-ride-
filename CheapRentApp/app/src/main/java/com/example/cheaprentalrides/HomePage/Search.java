@@ -1,19 +1,26 @@
 package com.example.cheaprentalrides.HomePage;
 
-import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.example.cheaprentalrides.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 
 public class Search extends Fragment {
@@ -21,6 +28,10 @@ public class Search extends Fragment {
     private TextInputEditText source,destination,load,passenger_count;
     private RadioGroup rg_search_vehicle_type;
     private MaterialButton search;
+    String str_vehicle_type,str_source,str_destination;
+    PostPojo postPojo;
+    float loddage;
+    DatabaseReference reference;
     public Search() {
         //constructor
     }
@@ -49,10 +60,12 @@ public class Search extends Fragment {
                 Profile profile=new Profile();
                 switch (checkedId){
                     case R.id.rb_load_vehicle:
+                        str_vehicle_type="LOAD";
                         profile.disabledEditText(passenger_count);
                         profile.enableEditText(load);
                         break;
                     case R.id.rb_passenger :
+                        str_vehicle_type="PASSENGERS";
                         profile.enableEditText(passenger_count);
                         profile.disabledEditText(load);
                         break;
@@ -61,12 +74,39 @@ public class Search extends Fragment {
             }
         });
 
+
+
         // onclick listener
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //get data from fields
 
+                Toast.makeText(getActivity(), "Searching...", Toast.LENGTH_SHORT).show();
+
+                if(str_vehicle_type.equals("LOAD"))
+                    loddage=Float.parseFloat(load.getText().toString());
+                else
+                    loddage=Float.parseFloat(passenger_count.getText().toString());
+
+                str_source=source.getText().toString().toUpperCase().replaceAll("\\s", "");;
+                str_destination=destination.getText().toString().toUpperCase().replaceAll("\\s", "");
+
+                SearchResults searchResults=new SearchResults();
+                Bundle bundle =new Bundle();
+                bundle.putString("source",str_source);
+                bundle.putString("destination",str_destination);
+                bundle.putString("vehicletype",str_vehicle_type);
+                bundle.putFloat("load",loddage);
+                searchResults.setArguments(bundle);
+
+                // inflate the fragment
+
+                getFragmentManager().beginTransaction().add(R.id.fragmentContainer,searchResults)
+                        .addToBackStack(null).commit();
+
+
+                /*getFragmentManager().beginTransaction().replace(R.id.fragmentContainer,searchResults)
+                        .addToBackStack(null).commit();*/
 
             }
         });

@@ -32,12 +32,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 
 public class Profile extends Fragment {
     private DatabaseReference reference;
-    TextView pro_name,pro_phone;
+    TextView pro_name,pro_phone , active_post,deleted_posts;
     TextInputEditText e_fullname,e_phone,e_Email,E_vehicle_number;
     MaterialButton edit,update,signout;
     Query checkUser;
@@ -67,6 +69,60 @@ public class Profile extends Fragment {
         signout=profileview.findViewById(R.id.signout);
         E_vehicle_number= profileview.findViewById(R.id.Vehicle_Number);
         edit=profileview.findViewById(R.id.profile_edit);
+        active_post=profileview.findViewById(R.id.activeposts);
+        deleted_posts=profileview.findViewById(R.id.deletedposts);
+
+        //Active and deleted posts count updation in profile
+        reference.child(phone).child("post").child("active").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List <PostPojo> activeposts=new ArrayList<>();
+
+                active_post.setText(String.valueOf(snapshot.getChildrenCount()));
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        reference.child(phone).child("post").child("deletedposts").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                deleted_posts.setText(String.valueOf(snapshot.getChildrenCount()));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        //active post list
+        active_post.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new ActivePosts())
+                        .addToBackStack(null).commit();
+            }
+        });
+
+        //all deleted post list
+
+        deleted_posts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new DeletedPost())
+                        .addToBackStack(null).commit();
+            }
+        });
+
+
+
+
+
         update=profileview.findViewById(R.id.profile_update);
         Email=e_Email.getText().toString();
         vehicle_number=E_vehicle_number.getText().toString();
