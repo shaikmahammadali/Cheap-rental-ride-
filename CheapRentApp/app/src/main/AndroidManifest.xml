@@ -3,7 +3,6 @@
     package="com.example.cheaprentalrides">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="Manifest.android.permission.BIND_INPUT_METHOD"/>
     <uses-permission android:name="android.permission.CALL_PHONE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>

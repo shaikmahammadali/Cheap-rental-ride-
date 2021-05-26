@@ -101,12 +101,11 @@ public class Search extends Fragment {
 
                 // inflate the fragment
 
-                getFragmentManager().beginTransaction().add(R.id.fragmentContainer,searchResults)
+                getFragmentManager().beginTransaction().add(R.id.fragmentContainer,searchResults).commit();
+
+
+                getFragmentManager().beginTransaction().replace(R.id.fragmentContainer,searchResults)
                         .addToBackStack(null).commit();
-
-
-                /*getFragmentManager().beginTransaction().replace(R.id.fragmentContainer,searchResults)
-                        .addToBackStack(null).commit();*/
 
             }
         });

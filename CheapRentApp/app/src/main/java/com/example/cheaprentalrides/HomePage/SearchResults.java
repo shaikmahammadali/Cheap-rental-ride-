@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,27 +51,30 @@ public class SearchResults extends Fragment {
         str_vehicle_type=getArguments().getString("vehicletype");
         loddage=getArguments().getFloat("load");
 
+       /* Log.i("source",str_source);
+        Log.i("load",Float.toString(loddage));*/
+
         //fetching data from firebase
-        postlist=new ArrayList<PostPojo>();
+
         reference= FirebaseDatabase.getInstance().getReference("users");
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+                postlist=new ArrayList<>();
                 for (DataSnapshot ds:snapshot.getChildren()){
 
-
+                    /*Log.i("username",ds.getKey());*/
                     reference.child(ds.getKey()).child("post").
                             child("active").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+                        public void onDataChange(@NonNull DataSnapshot snap) {
+                            for (DataSnapshot dataSnapshot:snap.getChildren()){
                                 postPojo=dataSnapshot.getValue(PostPojo.class);
+
                                 if (postPojo.getSource().equals(str_source) && postPojo.getDestination().equals(str_destination)
                                         &&postPojo.getVehicle_type().equals(str_vehicle_type) &&postPojo.getVehicle_load()>=loddage ){
-
+                                    /*Log.i("source",postPojo.source);*/
                                     postlist.add(postPojo);
-
 
                                 }
 
@@ -90,6 +94,7 @@ public class SearchResults extends Fragment {
 
 
                 }
+                Log.i("postsize",Long.toString(postlist.size()));
 
 
             }
