@@ -149,7 +149,7 @@
                 android:layout_margin="40dp"
                 android:gravity="center"
                 android:id="@+id/search"
-                android:text="Search"
+                android:text="Search Vehicle"
                 android:background="@color/activitybackground"
                 android:textColor="@color/black"/>
         </LinearLayout>

@@ -1,8 +1,14 @@
 package com.example.cheaprentalrides.HomePage;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.cheaprentalrides.R;
 import com.google.android.material.button.MaterialButton;
@@ -23,27 +30,55 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static androidx.core.content.ContextCompat.checkSelfPermission;
+
 
 public class SearchResults extends Fragment {
 
     DatabaseReference reference;
     RecyclerView searchrecyclerview;
     PostPojo postPojo;
-    List<PostPojo> postlist;
+    ArrayList<PostPojo> list;
     String str_vehicle_type,str_source,str_destination;
     float loddage;
+    String phone;
+    private static final int REQUEST_CALL = 1;
+
     public SearchResults() {
         // Required empty public constructor
     }
 
+    public void callPermissonRequest(String phone) {
+        this.phone=phone;
+        if (ContextCompat.checkSelfPermission(getContext(),
+                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.CALL_PHONE},REQUEST_CALL);
+        } else {
 
+            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone)));
+        }
+
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode==REQUEST_CALL){
+            if (grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED)
+            {
+                callPermissonRequest(phone);
+            }
+            else
+                Toast.makeText(getContext(), "Call Permission DENIED", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_search_results, container, false);
         searchrecyclerview=view.findViewById(R.id.search_recyclerview);
-        postlist=new ArrayList<>();
 
         //get data from search fragment
         str_source=getArguments().getString("source");
@@ -51,8 +86,10 @@ public class SearchResults extends Fragment {
         str_vehicle_type=getArguments().getString("vehicletype");
         loddage=getArguments().getFloat("load");
 
-       /* Log.i("source",str_source);
+        /*Log.i("source",str_source);
         Log.i("load",Float.toString(loddage));*/
+
+        list=new ArrayList<>();
 
         //fetching data from firebase
 
@@ -60,7 +97,7 @@ public class SearchResults extends Fragment {
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                postlist=new ArrayList<>();
+
                 for (DataSnapshot ds:snapshot.getChildren()){
 
                     /*Log.i("username",ds.getKey());*/
@@ -73,8 +110,8 @@ public class SearchResults extends Fragment {
 
                                 if (postPojo.getSource().equals(str_source) && postPojo.getDestination().equals(str_destination)
                                         &&postPojo.getVehicle_type().equals(str_vehicle_type) &&postPojo.getVehicle_load()>=loddage ){
-                                    /*Log.i("source",postPojo.source);*/
-                                    postlist.add(postPojo);
+                                    Log.i("source",postPojo.source);
+                                    list.add(postPojo);
 
                                 }
 
@@ -94,8 +131,9 @@ public class SearchResults extends Fragment {
 
 
                 }
-                Log.i("postsize",Long.toString(postlist.size()));
 
+               /* Log.i("postsize",Long.toString(list.size()));
+                Toast.makeText(getActivity(), Long.toString(list.size()), Toast.LENGTH_SHORT).show();*/
 
             }
 
@@ -106,10 +144,9 @@ public class SearchResults extends Fragment {
         });
 
         //setting fetched data to recyclerview adapter
-        Search_MyRecyclerviewAdapter searchadapter=new Search_MyRecyclerviewAdapter(getActivity(),postlist);
+        Search_MyRecyclerviewAdapter searchadapter=new Search_MyRecyclerviewAdapter(getActivity(),list);
         searchrecyclerview.setLayoutManager(new LinearLayoutManager(view.getContext()));
         searchrecyclerview.setAdapter(searchadapter);
-
 
 
 

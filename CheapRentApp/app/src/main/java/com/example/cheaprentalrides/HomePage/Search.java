@@ -29,9 +29,7 @@ public class Search extends Fragment {
     private RadioGroup rg_search_vehicle_type;
     private MaterialButton search;
     String str_vehicle_type,str_source,str_destination;
-    PostPojo postPojo;
     float loddage;
-    DatabaseReference reference;
     public Search() {
         //constructor
     }

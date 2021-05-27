@@ -1,6 +1,7 @@
 package com.example.cheaprentalrides.HomePage;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,7 +13,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cheaprentalrides.R;
@@ -20,12 +23,16 @@ import com.example.cheaprentalrides.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Search_MyRecyclerviewAdapter extends RecyclerView.Adapter<Search_MyRecyclerviewAdapter.MyViewHolder> {
+import static androidx.core.app.ActivityCompat.requestPermissions;
+
+public class Search_MyRecyclerviewAdapter extends RecyclerView.Adapter<Search_MyRecyclerviewAdapter.MyViewHolder>  {
     
     Context ctx;
-    List<PostPojo> postlist;
+    ArrayList<PostPojo> postlist;
     String phone;
-    public Search_MyRecyclerviewAdapter(Context ctx, List<PostPojo> postlist) {
+    private int REQUEST_CODE = 1;
+
+    public Search_MyRecyclerviewAdapter(Context ctx, ArrayList<PostPojo> postlist) {
         this.ctx = ctx;
         this.postlist = postlist;
     }
@@ -33,13 +40,13 @@ public class Search_MyRecyclerviewAdapter extends RecyclerView.Adapter<Search_My
     @NonNull
     @Override
     public Search_MyRecyclerviewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         return new MyViewHolder(LayoutInflater.from(parent.getContext()).
                 inflate(R.layout.search_row_design,parent,false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull Search_MyRecyclerviewAdapter.MyViewHolder holder, int position) {
-        postlist=new ArrayList<>();
         phone=postlist.get(position).phone;
         holder.source.setText(postlist.get(position).getSource()+"  TO  ");
         holder.destination.setText(postlist.get(position).getDestination());
@@ -52,10 +59,35 @@ public class Search_MyRecyclerviewAdapter extends RecyclerView.Adapter<Search_My
         else {
             holder.load.setText("Passengers : "+String.valueOf((int)postlist.get(position).getVehicle_load()));
         }
+        holder.call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+
+                if (ActivityCompat.checkSelfPermission(ctx, Manifest.permission.CALL_PHONE)== PackageManager.PERMISSION_GRANTED)
+                {
+
+                    ctx.startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+postlist.get(position).phone)));
+
+                    return ;
+                }
+
+
+
+            }
+        });
 
 
 
     }
+
+    private void permissonrequest() {
+
+
+    }
+
 
     @Override
     public int getItemCount() {
@@ -75,18 +107,6 @@ public class Search_MyRecyclerviewAdapter extends RecyclerView.Adapter<Search_My
             /*date=itemView.findViewById(R.id.timeofupload);*/
             vehicle_details=itemView.findViewById(R.id.vehicle_description);
             call=itemView.findViewById(R.id.call);
-            call.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    if (ActivityCompat.checkSelfPermission(itemView.getContext(), Manifest.permission.CALL_PHONE)!= PackageManager.PERMISSION_GRANTED)
-                    {
-                        itemView.getContext().startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+postlist.get(getAdapterPosition()).phone)));
-                        return ;
-                    }
-
-                }
-            });
 
 
 

@@ -65,12 +65,11 @@ public class Login extends AppCompatActivity {
         login = findViewById(R.id.login);
         textView_phone = findViewById(R.id.tv_phone);
         textView_otp = findViewById(R.id.tv_otp);
-        home=findViewById(R.id.homepage);
         rootnode = FirebaseDatabase.getInstance();
         reference = rootnode.getReference("users");
 
         //homepage navigation
-        home.setOnClickListener(new View.OnClickListener() {
+        /*home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String names,phones;
@@ -81,7 +80,7 @@ public class Login extends AppCompatActivity {
                 reference.child(phones).child("email").setValue("alishaik648@gmail.com");
                 startActivity(new Intent(Login.this, HomePage.class));
             }
-        });
+        });*/
 
         //save users data in firebase
         login.setOnClickListener(new View.OnClickListener() {
