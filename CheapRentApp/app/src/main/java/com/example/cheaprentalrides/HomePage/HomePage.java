@@ -4,6 +4,7 @@ package com.example.cheaprentalrides.HomePage;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -13,9 +14,12 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Switch;
@@ -44,7 +48,8 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         chipNavigationBar=findViewById(R.id.chipnavigation);
-
+        callPermissionRequest();
+        storagePermissionRequest();
         //default fragment
         chipNavigationBar.setItemSelected(R.id.srch,true);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new Search()).commit();
@@ -67,6 +72,56 @@ public class HomePage extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void callPermissionRequest(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                && checkSelfPermission(Manifest.permission.CALL_PHONE)
+                != PackageManager.PERMISSION_GRANTED){
+            requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, 1);
+        }
+    }
+
+    public void storagePermissionRequest(){
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED){
+            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 2);
+        }
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode){
+            case 1:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    Toast.makeText(this, "Call Permission Granted", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(this, "Call permission Denied ", Toast.LENGTH_SHORT).show();
+                    callPermissionRequest();
+
+                }
+                break;
+
+            case 2:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    Toast.makeText(this, "Strorage Permission Granted", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(this, "Storage permission Denied ", Toast.LENGTH_SHORT).show();
+                    storagePermissionRequest();
+
+                }
+
+        }
+
+
+
     }
 
 

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ public class Search extends Fragment {
 
     private TextInputEditText source,destination,load,passenger_count;
     private RadioGroup rg_search_vehicle_type;
+    private RadioButton rb_load,rb_passengers;
     private MaterialButton search;
     String str_vehicle_type,str_source,str_destination;
     float loddage;
@@ -42,6 +44,8 @@ public class Search extends Fragment {
         //hooks
         source=view.findViewById(R.id.search_source);
         destination=view.findViewById(R.id.search_destination);
+        rb_load=view.findViewById(R.id.rb_load_vehicle);
+        rb_passengers=view.findViewById(R.id.rb_passenger);
         load=view.findViewById(R.id.search_Load);
         passenger_count=view.findViewById(R.id.search_Passenger_count);
         rg_search_vehicle_type =view.findViewById(R.id.rg_search_vehcle_type);
@@ -79,31 +83,58 @@ public class Search extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getActivity(), "Searching...", Toast.LENGTH_SHORT).show();
-
-                if(str_vehicle_type.equals("LOAD"))
-                    loddage=Float.parseFloat(load.getText().toString());
-                else
-                    loddage=Float.parseFloat(passenger_count.getText().toString());
-
                 str_source=source.getText().toString().toUpperCase().replaceAll("\\s", "");;
                 str_destination=destination.getText().toString().toUpperCase().replaceAll("\\s", "");
 
-                SearchResults searchResults=new SearchResults();
-                Bundle bundle =new Bundle();
-                bundle.putString("source",str_source);
-                bundle.putString("destination",str_destination);
-                bundle.putString("vehicletype",str_vehicle_type);
-                bundle.putFloat("load",loddage);
-                searchResults.setArguments(bundle);
-
-                // inflate the fragment
-
-                getFragmentManager().beginTransaction().add(R.id.fragmentContainer,searchResults).commit();
+                if (!(str_source.isEmpty())){
+                    if (!(str_destination.isEmpty())){
+                       if ((rb_load.isChecked()||rb_passengers.isChecked())){
 
 
-                getFragmentManager().beginTransaction().replace(R.id.fragmentContainer,searchResults)
-                        .addToBackStack(null).commit();
+                           if ((!load.getText().toString().isEmpty()||!passenger_count.getText().toString().isEmpty())){
+
+                               if(str_vehicle_type.equals("LOAD"))
+                                   loddage=Float.parseFloat(load.getText().toString());
+                               else
+                                   loddage=Float.parseFloat(passenger_count.getText().toString());
+
+                               // search post here
+                               SearchResults searchResults=new SearchResults();
+                               Bundle bundle =new Bundle();
+                               bundle.putString("source",str_source);
+                               bundle.putString("destination",str_destination);
+                               bundle.putString("vehicletype",str_vehicle_type);
+                               bundle.putFloat("load",loddage);
+                               searchResults.setArguments(bundle);
+
+                               // inflate the fragment
+
+                               getFragmentManager().beginTransaction().add(R.id.fragmentContainer,searchResults).commit();
+
+
+                               getFragmentManager().beginTransaction().replace(R.id.fragmentContainer,searchResults)
+                                       .addToBackStack(null).commit();
+
+                               Toast.makeText(getActivity(), "Searching...", Toast.LENGTH_SHORT).show();
+
+
+                           }
+                           else
+                                   load.setError("Field is not be Empty");
+                                   passenger_count.setError("Field is not be Empty");
+
+                       }
+                        else
+                            rb_load.setError("Button is not Checked");
+                    }
+                    else
+                        destination.setError("Field is not be Empty");
+                }
+                else
+                    source.setError("Field is not be Empty");
+
+
+
 
             }
         });

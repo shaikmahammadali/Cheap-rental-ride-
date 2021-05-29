@@ -63,18 +63,7 @@ public class Search_MyRecyclerviewAdapter extends RecyclerView.Adapter<Search_My
             @Override
             public void onClick(View v) {
 
-
-
-
-                if (ActivityCompat.checkSelfPermission(ctx, Manifest.permission.CALL_PHONE)== PackageManager.PERMISSION_GRANTED)
-                {
-
-                    ctx.startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+postlist.get(position).phone)));
-
-                    return ;
-                }
-
-
+                ctx.startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone)));
 
             }
         });
@@ -83,10 +72,6 @@ public class Search_MyRecyclerviewAdapter extends RecyclerView.Adapter<Search_My
 
     }
 
-    private void permissonrequest() {
-
-
-    }
 
 
     @Override

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -48,31 +49,7 @@ public class SearchResults extends Fragment {
         // Required empty public constructor
     }
 
-    public void callPermissonRequest(String phone) {
-        this.phone=phone;
-        if (ContextCompat.checkSelfPermission(getContext(),
-                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.CALL_PHONE},REQUEST_CALL);
-        } else {
 
-            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone)));
-        }
-
-
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode==REQUEST_CALL){
-            if (grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED)
-            {
-                callPermissonRequest(phone);
-            }
-            else
-                Toast.makeText(getContext(), "Call Permission DENIED", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
