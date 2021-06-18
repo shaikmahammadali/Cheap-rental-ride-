@@ -3,6 +3,7 @@ package com.example.cheaprentalrides.HomePage;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cheaprentalrides.R;
@@ -39,10 +41,12 @@ public class SearchResults extends Fragment {
     DatabaseReference reference;
     RecyclerView searchrecyclerview;
     PostPojo postPojo;
-    ArrayList<PostPojo> list;
+    List<PostPojo> list;
+    long i=0;
     String str_vehicle_type,str_source,str_destination;
     float loddage;
     String phone;
+    TextView dataStatus;
     private static final int REQUEST_CALL = 1;
 
     public SearchResults() {
@@ -56,12 +60,14 @@ public class SearchResults extends Fragment {
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_search_results, container, false);
         searchrecyclerview=view.findViewById(R.id.search_recyclerview);
+        dataStatus=view.findViewById(R.id.datastatus);
 
         //get data from search fragment
         str_source=getArguments().getString("source");
         str_destination=getArguments().getString("destination");
         str_vehicle_type=getArguments().getString("vehicletype");
         loddage=getArguments().getFloat("load");
+
 
         /*Log.i("source",str_source);
         Log.i("load",Float.toString(loddage));*/
@@ -89,6 +95,7 @@ public class SearchResults extends Fragment {
                                         &&postPojo.getVehicle_type().equals(str_vehicle_type) &&postPojo.getVehicle_load()>=loddage ){
                                     Log.i("source",postPojo.source);
                                     list.add(postPojo);
+                                    i++;
 
                                 }
 
@@ -109,6 +116,15 @@ public class SearchResults extends Fragment {
 
                 }
 
+
+
+
+                    //setting fetched data to recyclerview adapter
+                    Search_MyRecyclerviewAdapter searchadapter = new Search_MyRecyclerviewAdapter(getContext(),list);
+                    searchrecyclerview.setLayoutManager(new LinearLayoutManager(view.getContext()));
+                    searchrecyclerview.setAdapter(searchadapter);
+
+
                /* Log.i("postsize",Long.toString(list.size()));
                 Toast.makeText(getActivity(), Long.toString(list.size()), Toast.LENGTH_SHORT).show();*/
 
@@ -118,12 +134,16 @@ public class SearchResults extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
+
+
+
+
+
+
+
+
         });
 
-        //setting fetched data to recyclerview adapter
-        Search_MyRecyclerviewAdapter searchadapter=new Search_MyRecyclerviewAdapter(getActivity(),list);
-        searchrecyclerview.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        searchrecyclerview.setAdapter(searchadapter);
 
 
 

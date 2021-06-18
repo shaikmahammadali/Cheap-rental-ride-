@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_margin="10dp"
     android:background="@color/activitybackground"
     android:layout_height="wrap_content">
+    <com.denzcoskun.imageslider.ImageSlider
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:id="@+id/imageslider"
+        app:auto_cycle="true"
+        android:layout_margin="10dp"
+        app:error_image="@drawable/ic_baseline_image_not_supported_24"
+        app:placeholder="@drawable/ic_baseline_image_24"
+        app:delay="0"
+        app:period="1000"
+        app:corner_radius="18"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

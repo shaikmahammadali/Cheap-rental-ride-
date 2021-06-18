@@ -39,7 +39,7 @@ public class Post extends Fragment {
     public TextInputEditText source, destination, load, passenger, vehicle_name, vehicle_des;
     RadioGroup rg_post_vehivle_type;
     RadioButton rb_load, rb_passengers;
-    DatabaseReference reference;
+    DatabaseReference reference,photoreference;
     String postid;
     MaterialButton post,active_posts,deleted_posts;
     String str_source, str_destination, str_vehicle_type, str_vehicle_name, str_vehicle_details,phone;
@@ -110,7 +110,24 @@ public class Post extends Fragment {
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //updating vehicle photoes
+                
+                photoreference=FirebaseDatabase.getInstance().getReference().child("users").child(phone);
+                photoreference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (!snapshot.child("vehiclephotoes").exists())
+                        {
+                            getFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.fragmentContainer,new VehiclePhotoUploader()).commit();
+                        }
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                
                 //get data from views
                 str_source = source.getText().toString().toUpperCase().replaceAll("\\s", "");
                 str_destination = destination.getText().toString().toUpperCase().replaceAll("\\s", "");

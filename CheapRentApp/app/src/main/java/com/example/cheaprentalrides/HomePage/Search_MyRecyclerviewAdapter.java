@@ -18,7 +18,13 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.cheaprentalrides.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,13 +34,15 @@ import static androidx.core.app.ActivityCompat.requestPermissions;
 public class Search_MyRecyclerviewAdapter extends RecyclerView.Adapter<Search_MyRecyclerviewAdapter.MyViewHolder>  {
     
     Context ctx;
-    ArrayList<PostPojo> postlist;
+    List<PostPojo> postlist;
+    List<SlideModel> slideModels;
     String phone;
     private int REQUEST_CODE = 1;
 
-    public Search_MyRecyclerviewAdapter(Context ctx, ArrayList<PostPojo> postlist) {
+    public Search_MyRecyclerviewAdapter(Context ctx, List<PostPojo> postlist) {
         this.ctx = ctx;
         this.postlist = postlist;
+        slideModels=new ArrayList<>();
     }
 
     @NonNull
@@ -68,6 +76,28 @@ public class Search_MyRecyclerviewAdapter extends RecyclerView.Adapter<Search_My
             }
         });
 
+        FirebaseDatabase.getInstance().getReference().child("users").child(phone).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if (snapshot.hasChild("vehiclephotoes")) {
+                    slideModels.clear();
+
+                    for (DataSnapshot ds : snapshot.child("vehiclephotoes").getChildren()) {
+
+                        slideModels.add(new SlideModel(ds.getValue(String.class), "Vehicle Photoes"));
+                    }
+                    holder.imageSlider.setImageList(slideModels, true);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
 
     }
@@ -82,6 +112,7 @@ public class Search_MyRecyclerviewAdapter extends RecyclerView.Adapter<Search_My
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView source,destination,vehicle_name,load,date,vehicle_details;
         ImageButton call;
+        ImageSlider imageSlider;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -91,6 +122,7 @@ public class Search_MyRecyclerviewAdapter extends RecyclerView.Adapter<Search_My
             load=itemView.findViewById(R.id.load);
             /*date=itemView.findViewById(R.id.timeofupload);*/
             vehicle_details=itemView.findViewById(R.id.vehicle_description);
+            imageSlider=itemView.findViewById(R.id.imageslider);
             call=itemView.findViewById(R.id.call);
 
 

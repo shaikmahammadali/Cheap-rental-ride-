@@ -272,6 +272,15 @@
                 <com.google.android.material.button.MaterialButton
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/btn_vehicle_photoes"
+                    android:text="Edit Vehicle photoes"
+                    android:background="@color/activitybackground"
+                    android:layout_margin="10dp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/activitybackground"
                     android:id="@+id/signout"
                     android:text="Signout"
                     android:layout_margin="10dp"/>

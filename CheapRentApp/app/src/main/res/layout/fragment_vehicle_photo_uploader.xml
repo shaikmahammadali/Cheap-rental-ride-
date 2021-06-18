@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".HomePage.VehiclePhotoUploader">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:textSize="25sp"
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+        android:text="Add vehicle Photoes to your Post"/>
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:id="@+id/vehicle_photoes"
+        android:src="@drawable/photoadd_24"
+        android:layout_margin="10dp"/>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressbar"
+            android:layout_gravity="center"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/my_menu_badge_color"
+            android:textSize="18sp"
+            android:text="Photoes are Uploading...."
+            android:visibility="gone"
+            android:id="@+id/txt_uploadstatus"/>
+        <com.denzcoskun.imageslider.ImageSlider
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:id="@+id/imageslider"
+            app:auto_cycle="true"
+            app:error_image="@drawable/ic_baseline_image_not_supported_24"
+            app:placeholder="@drawable/ic_baseline_image_24"
+            app:delay="0"
+            app:period="1000"
+            app:corner_radius="18"/>
+
+    </LinearLayout>
+    </ScrollView>
+
+
+</FrameLayout>

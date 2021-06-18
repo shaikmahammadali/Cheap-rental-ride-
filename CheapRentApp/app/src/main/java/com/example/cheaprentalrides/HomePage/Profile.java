@@ -53,7 +53,7 @@ public class Profile extends Fragment {
     private DatabaseReference reference;
     TextView pro_name, pro_phone, active_post, deleted_posts, txt_profilepic_change;
     TextInputEditText e_fullname, e_phone, e_Email, E_vehicle_number;
-    MaterialButton edit, update, signout;
+    MaterialButton edit, update, signout,vehiclephotoes_btn;
     Query checkUser;
     String Full_name, phone, Email, vehicle_number;
     private static final int SELECT_PHOTO = 100;
@@ -97,10 +97,30 @@ public class Profile extends Fragment {
 
     }
 
+    private void deleteprofilephoto(){
+        reference.child(phone).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.hasChild("profilephoto"))
+                {   StorageReference photoreference=FirebaseStorage.getInstance().
+                        getReferenceFromUrl(snapshot.child("profilephoto").getValue(String.class));
+                    photoreference.delete();
+
+                    Toast.makeText(getContext(), " old profile deleted", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
     private void uploadToFirebase(Uri selectImageURI) {
         StorageReference fileRef = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(selectImageURI));
 
+        deleteprofilephoto();
 
         fileRef.putFile(selectImageURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -153,9 +173,10 @@ public class Profile extends Fragment {
         //getting Firebase refrence
         reference = FirebaseDatabase.getInstance().getReference("users");
         //getting firebase storage
-        storageReference = FirebaseStorage.getInstance().getReference().child(phone).child("profilephoto");
+        storageReference = FirebaseStorage.getInstance().getReference().child("users").child(phone).child("profilephoto");
         //hooks
         progressBar = profileview.findViewById(R.id.progressbar);
+        vehiclephotoes_btn=profileview.findViewById(R.id.btn_vehicle_photoes);
         profilepic = profileview.findViewById(R.id.profile_image);
         txt_profilepic_change = profileview.findViewById(R.id.profile_pic_edit);
         pro_name = profileview.findViewById(R.id.profile_fullname);
@@ -170,6 +191,15 @@ public class Profile extends Fragment {
         deleted_posts = profileview.findViewById(R.id.deletedposts);
 
         progressBar.setVisibility(View.INVISIBLE);
+
+        //edit vehicle photoes
+        vehiclephotoes_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().
+                        replace(R.id.fragmentContainer,new VehiclePhotoUploader()).addToBackStack(null).commit();
+            }
+        });
 
         //set profile pic
         reference.child(phone).addListenerForSingleValueEvent(new ValueEventListener() {
