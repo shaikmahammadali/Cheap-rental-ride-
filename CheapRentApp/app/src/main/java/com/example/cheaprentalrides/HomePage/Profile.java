@@ -53,7 +53,7 @@ public class Profile extends Fragment {
     private DatabaseReference reference;
     TextView pro_name, pro_phone, active_post, deleted_posts, txt_profilepic_change;
     TextInputEditText e_fullname, e_phone, e_Email, E_vehicle_number;
-    MaterialButton edit, update, signout,vehiclephotoes_btn;
+    MaterialButton edit, update, aboutus_btn,signout,vehiclephotoes_btn;
     Query checkUser;
     String Full_name, phone, Email, vehicle_number;
     private static final int SELECT_PHOTO = 100;
@@ -176,6 +176,7 @@ public class Profile extends Fragment {
         storageReference = FirebaseStorage.getInstance().getReference().child("users").child(phone).child("profilephoto");
         //hooks
         progressBar = profileview.findViewById(R.id.progressbar);
+        aboutus_btn=profileview.findViewById(R.id.aboutus);
         vehiclephotoes_btn=profileview.findViewById(R.id.btn_vehicle_photoes);
         profilepic = profileview.findViewById(R.id.profile_image);
         txt_profilepic_change = profileview.findViewById(R.id.profile_pic_edit);
@@ -183,6 +184,7 @@ public class Profile extends Fragment {
         pro_phone = profileview.findViewById(R.id.profile_Phone);
         e_fullname = profileview.findViewById(R.id.full_name);
         e_phone = profileview.findViewById(R.id.phone);
+
         e_Email = profileview.findViewById(R.id.email);
         signout = profileview.findViewById(R.id.signout);
         E_vehicle_number = profileview.findViewById(R.id.Vehicle_Number);
@@ -370,6 +372,16 @@ public class Profile extends Fragment {
 
             }
 
+        });
+
+        //aboutus
+        aboutus_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().
+                        replace(R.id.fragmentContainer, new AboutUs()).
+                        addToBackStack(null).commit();
+            }
         });
 
         //signout operation

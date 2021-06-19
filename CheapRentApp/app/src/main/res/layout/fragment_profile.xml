@@ -276,6 +276,13 @@
                     android:text="Edit Vehicle photoes"
                     android:background="@color/activitybackground"
                     android:layout_margin="10dp"/>
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/activitybackground"
+                    android:id="@+id/aboutus"
+                    android:text="AboutUs"
+                    android:layout_margin="10dp"/>
 
                 <com.google.android.material.button.MaterialButton
                     android:layout_width="match_parent"
